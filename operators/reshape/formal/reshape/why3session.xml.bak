@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"https://www.why3.org/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="CVC4" version="1.8" timelimit="5" steplimit="0" memlimit="2000"/>
+<prover id="1" name="Alt-Ergo" version="2.6.2" timelimit="5" steplimit="0" memlimit="4000"/>
+<prover id="2" name="CVC5" version="1.2.1" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="3" name="Z3" version="4.13.4" timelimit="1" steplimit="0" memlimit="1000"/>
+<file format="whyml" proved="true">
+<path name=".."/><path name="reshape.mlw"/>
+<theory name="OPReshape" proved="true">
+ <goal name="get_dim_positive&#39;vc" expl="VC for get_dim_positive" proved="true">
+ <proof prover="3"><result status="valid" time="0.017246" steps="36990"/></proof>
+ </goal>
+ <goal name="reshape&#39;vc" expl="VC for reshape" proved="true">
+ <proof prover="2"><result status="valid" time="0.181127" steps="32402"/></proof>
+ </goal>
+</theory>
+<theory name="COPReshape" proved="true">
+ <goal name="creshape&#39;vc" expl="VC for creshape" proved="true">
+ <transf name="split_vc" proved="true" >
+  <goal name="creshape&#39;vc.0" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.004265" steps="9232"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.1" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.008733" steps="9758"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.2" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.010629" steps="14840"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.3" expl="precondition" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="creshape&#39;vc.3.0" expl="precondition" proved="true">
+   <proof prover="1" timelimit="30"><result status="valid" time="7.162808" steps="277910"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="creshape&#39;vc.4" expl="precondition" proved="true">
+  <proof prover="1" timelimit="1" memlimit="1000"><result status="valid" time="0.955484" steps="52228"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.5" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.008071" steps="15917"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.6" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.003932" steps="11039"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.7" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.443010" steps="57466"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.8" expl="precondition" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="creshape&#39;vc.8.0" expl="precondition" proved="true">
+   <proof prover="1" memlimit="2000"><result status="valid" time="2.869707" steps="110197"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="creshape&#39;vc.9" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.095257" steps="20003"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.10" expl="integer overflow" proved="true">
+  <proof prover="3"><result status="valid" time="0.056966" steps="330674"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.11" expl="loop invariant init" proved="true">
+  <proof prover="3"><result status="valid" time="0.009209" steps="17907"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.12" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.184259" steps="30934"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.13" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.047739" steps="348214"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.14" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.193924" steps="31103"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.15" expl="loop invariant preservation" proved="true">
+  <proof prover="2"><result status="valid" time="0.143969" steps="27495"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.16" expl="assertion" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="creshape&#39;vc.16.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="valid" time="1.670003" steps="179074"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="creshape&#39;vc.17" expl="postcondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.087544" steps="378005"/></proof>
+  </goal>
+  <goal name="creshape&#39;vc.18" expl="out of loop bounds" proved="true">
+  <proof prover="3"><result status="valid" time="0.072732" steps="332663"/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>
