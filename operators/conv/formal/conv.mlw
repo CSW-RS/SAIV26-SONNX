@@ -169,18 +169,17 @@ module COPConv2d
 
 
   let lemma ivector_get_dim_value_at (coords: iarray) (n: int) (i: int)
-  requires { n = 4 }
-  requires { 0 <= i < n }
-  requires { valid_range coords 0 n }
-  ensures  { get_dim (ivector coords n) i = value_at coords i }
-  =
-  assert { ivector coords 4 = Cons (to_int (value_at coords 0)) 
-                            (Cons (to_int (value_at coords 1)) 
-                            (Cons (to_int (value_at coords 2)) 
-                            (Cons (to_int (value_at coords 3)) Nil))) };
-  assert { i = 0 \/ i = 1 \/ i = 2 \/ i = 3 }
+    requires { n = 4 }
+    requires { 0 <= i < n }
+    requires { valid_range coords 0 n }
+    ensures  { get_dim (ivector coords n) i = value_at coords i }
+    =
+    assert { ivector coords 4 = Cons (to_int (value_at coords 0)) 
+                              (Cons (to_int (value_at coords 1)) 
+                              (Cons (to_int (value_at coords 2)) 
+                              (Cons (to_int (value_at coords 3)) Nil))) };
+    assert { i = 0 \/ i = 1 \/ i = 2 \/ i = 3 }
 
-  
 
   let coords_from_X_p (x: ctensor) (x_p_coords : iarray) ( pad_top pad_left :int32) : (float, bool) = 
     requires { valid_tensor x }
