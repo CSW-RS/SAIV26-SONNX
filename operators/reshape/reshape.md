@@ -1,7 +1,7 @@
 # Contents
 - **Reshape** operator for type [(real,integer)](#real)
 - **Reshape** operator for type [(datatype,int64)](#types)
-  - where `datatype` in { bool, string, float16, float32, float64, int2, int4, int8, int16, int32, int64, uint2, uint4, uint8, uint16, uint32, uint64}
+  - where `datatype` in { bool, string, float16, float32, double, int2, int4, int8, int16, int32, int64, uint2, uint4, uint8, uint16, uint32, uint64}
  
 Based on ONNX documentation [Reshape version 25](https://onnx.ai/onnx/operators/onnx__Reshape.html).
  
@@ -277,6 +277,6 @@ The $\textbf{Reshape}$ operator does not introduce any numerical error. Hence, f
 
 <a id = "types"></a>
 # **Reshape** (datatype, int64)
-where datatype is in : { bool, string, float16, float32, float64, int2, int4, int8, int16, int32, int64, uint2, uint4, uint8, uint16, uint32, uint64 }
+where datatype is in : { bool, string, float16, float32, double, int2, int4, int8, int16, int32, int64, uint2, uint4, uint8, uint16, uint32, uint64 }
 
 See specification for [(real,integer)](#real).
