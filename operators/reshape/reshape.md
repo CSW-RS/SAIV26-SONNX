@@ -32,39 +32,24 @@ The reshape operation depends on the attribute `allowzero`. If:
 
 It is possible to have **at most one dimension in $S$ with value -1**. In such case that dimension is inferred from the size of the input tensor $X$ and the remaining dimensions in $S$.
  
-The operation is performed in two steps.
-
-### 1. Compute a the flattened index for the output tensor $Y$:
-
-$$\mathit{flat\_y} = \operatorname{offset}\!\left(\,Y_{\mathit{coords}},\; Y_{\mathit{shape}}\,\right)$$
- 
-where:
-- $Y_{\text {coords}}$ are the coordinates of an element in the output tensor $Y$.
-- $Y_{\text {shape}}$ is the shape of the output tensor $Y$.
-- $\text{offset}$ is defined [here](../common/definitions).
- 
-### 2. Compute the corresponding $X$ coordinates from the flattened index:
-$$X_{\mathit{coords}} = index \left(\mathit{flat\_y}, X_{\mathit{shape}}\right)$$
-
-where:
-- $flat\_y$ is the flattened index computed in step 1.
-
-- $X_shape$ is the shape of the input tensor $X$.
-
-- $index$ is defined [here](../common/definitions).
-
----
 
 Reshape operation can then be expressed as:
  
 $$Y[i_0, i_1, \ldots, i_{rY-1}] = X[\displaystyle index \left(offset([i_0, i_1, \ldots, i_{rY-1}], Y_{\mathit{shape}}), X_{\mathit{shape}}\right)] $$
  
 Where:
+
+- $ n \in [0, rY - 1]$
+
 - $i_n \in [0, dY_n - 1]$
  
 - $X_{\mathit{shape}}$ is the shape of the input tensor $X$
 
 - $Y_{\mathit{shape}}$ is the shape of the output tensor $Y$
+
+- $\text{offset}$ is defined [here](../common/definitions).
+
+- $\text{index}$ is defined [here](../common/definitions).
  
  
 ### Example 1
