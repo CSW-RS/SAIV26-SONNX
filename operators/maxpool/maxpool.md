@@ -27,9 +27,10 @@ The following specific restrictions apply to the **MaxPool** operator:
 |-------------|-------------------------------------------------------------|---------------------------------------------------------------------------------------------|
 | `[R1]` <a id="R1"></a> | Input tensor $X$ has 2 spatial axes | Transient |
 | `[R2]` <a id="R2"></a> | All attributes must be explicitly set  | [No default values](../../../../../deliverables/reqs/reqs.md#no_default_value)
-| `[R3]` <a id="R3"></a> | Attribute `auto_pad` is restricted to NOTSET  | Transient
-| `[R4]` <a id="R4"></a> | Attribute `ceil_mode` is set to zero  | Transient
-| `[R5]` <a id="R5"></a> | Attribute `storage_order` is set to zero | Transient
+| `[R3]` <a id="R3"></a> | Attribute $\text{auto\_pad}$ is restricted to NOTSET  | Transient
+| `[R4]` <a id="R4"></a> | Attribute $\text{ceil\_mode}$ is set to zero  | Transient
+| `[R5]` <a id="R5"></a> | Attribute $\text{storage\_order}$ is set to zero | Transient
+| `[R6]` <a id="R6"></a> | The spatial dimensions of the output tensor $Y$ are positive | Transient
 
 <a id="Informal_spec"></a>
 ## Informal specification
@@ -63,6 +64,38 @@ Where
 - $\text{strides}$ is an attribute of the operator. It will be described later in this section.
 - $\text{dilations}$ is an attribute of the operator. It will be described later in this section.
 - $X_{p} = \text{pad}(X,pads)$ is the padded version of the input tensor $X$. Function $\text{pad}$ applies padding as specified by attribute [pads](#real_pads).
+
+
+### Output shape calculation
+The shape of the output tensor $Y$ is determined by the shape of the input tensor $X$, and the values of attributes $\text{kernel\_shape}$, $\text{pads}$, $\text{dilations}$ and $\text{strides}$.
+
+$$
+Y_\textbf{shape} = \left(dX_0, dX_1, dY_2, dY_3\right)
+$$
+
+Where:
+
+- $dY_2 =  \displaystyle\left\lfloor{\frac{\alpha-\theta}{\text{strides}[0]}} \right\rfloor + 1$
+
+    <br>
+
+    - $\displaystyle\alpha = dX_2 + \text{pads}[0] + \text{pads}[2]$
+
+    <br>
+
+    - $\displaystyle\theta = \text{dilations}[0] * (\text{kernel\_shape}[0] - 1) + 1$
+
+<br>
+
+- $dY_3 =  \displaystyle\left\lfloor{\frac{\beta-\gamma}{\text{strides}[1]}} \right\rfloor + 1$
+
+    <br>
+
+    - $\displaystyle\beta = dX_3 + \text{pads}[1] + \text{pads}[3]$
+
+    <br>
+
+    - $\displaystyle\gamma = \text{dilations}[1] * (\text{kernel\_shape}[1] - 1) + 1$
 
 ### A graphical view of MaxPool:
 
@@ -185,8 +218,14 @@ In the example above:
 - `[C2]`: Relation between $\text{dilations}$ and $W$ 
     - Statement: The $\text{dilations}$ and $\text{kernel\_shape}$ lists have the same length
     - Rationale: Dilation is defined for all spatial axes of $W$.
-- `[C3]`: Consistency between the shape of tensors $Y$, $X$ and attributes $\text{kernel\_shape}$, $\text{pads}$, $\text{dilations}$ and $\text{strides}$  
-    - Statement: See constraint [<b><span style="font-family: 'Courier New', monospace">[C1]</span></b>](#shape_consist) on tensor $Y$.
+- `[C3]`: <a id="shape_consist"></a> Consistency between the shape of tensors $Y$, $X$ and attributes $\text{kernel\_shape}$, $\text{pads}$, $\text{dilations}$ and $\text{strides}$  
+    - Statement: 
+        *  $dY_2 > 0$
+         
+      and
+      
+        * $dY_3 > 0$
+    - Rationale: `[R6]`
 
 
 
@@ -210,7 +249,11 @@ The value of the constant to pad depends on the input tensor data type. Therefor
     - Statement: The length of the $\text{pads}$ list is twice the number of spatial axes of $X$
     - Rationale: Padding shall be given for all spatial axes, and a begining value and an end value must be given for each axis.
 - `[C2]`: Consistency between the shape of tensors $Y$, $X$ and attributes $\text{kernel\_shape}$, $\text{pads}$, $\text{dilations}$ and $\text{strides}$  
-    - Statement: See constraint [<b><span style="font-family: 'Courier New', monospace">[C1]</span></b>](#shape_consist) on tensor $Y$.
+    - Statement: See constraint [<b><span style="font-family: 'Courier New', monospace">[C3]</span></b>](#shape_consist) on $\text{dilations}$.
+
+- `[C3]`: Value domain
+    - Statement: $\text{pads}[0] < \text{kernel\_shape}[0]$ and $\text{pads}[2] < \text{kernel\_shape}[0]$ and $\text{pads}[1] < \text{kernel\_shape}[1]$ and $\text{pads}[3] < \text{kernel\_shape}[1]$
+    - Rationale: The padding values must be strictly less than the corresponding kernel dimension. 
 
 ### $\text{storage\_order}$: `int`
 
@@ -235,8 +278,7 @@ The effect of the $\text{strides}$ attribute is illustrated on the following fig
     - Statement: $\text{strides}$ is a list of strictly positive integers.
     - Rationale: Stride values represent the number of applications of the kernel in the two spatial dimensions
 - `[C2]`: Consistency between the shape of tensors $Y$, $X$ and  attributes $\text{kernel\_shape}$, $\text{pads}$, $\text{dilations}$ and $\text{strides}$
-    - Statement: See constraint [<b><span style="font-family: 'Courier New', monospace">[C1]</span></b>](#shape_consist) on tensor $Y$.
-
+    - Statement: See constraint [<b><span style="font-family: 'Courier New', monospace">[C3]</span></b>](#shape_consist) on tensor $\text{dilations}$.
 
 
 ## Inputs
@@ -259,9 +301,9 @@ Where
     - Statement: The number of spatial axes of tensor $X$ is 2. 
     - Rationale: `R1`.
 - `[C2]`: Consistency between the shape of tensors $Y$, $X$ and  attributes $\text {kernel\_shape}, \text {pads}, \text {dilations}$ and $\text {strides}$
-    - Statement: See constraint [<b><span style="font-family: 'Courier New', monospace">[C1]</span></b>](#shape_consist) on tensor $Y$.
+    - Statement: See constraint [<b><span style="font-family: 'Courier New', monospace">[C3]</span></b>](#shape_consist) on tensor $\text{dilations}$.
 
-- `[C4]` Axis denotations 
+- `[C3]`<a id="C1Xia"></a> Axis denotations 
     - Statement: If axis denotation is in effect, the operation expects input data tensor to have axis denotation \[`DATA_BATCH`, `DATA_CHANNEL`, `DATA_FEATURE`, `DATA_FEATURE`\].
     - Rationale: Denotation convention
 
@@ -276,12 +318,8 @@ The shape of the output $Y$ is $(dY_0 , dY_1 , dY_2 , dY_3)$ where
 - $dY_2$ and $dY_3$ are the sizes of the output for the two spatial axes
 
 #### Constraints.
-- `[C1]`: <a id="shape_consist"></a> Consistency between the shape of tensors $Y$, $X$, and attributes $\text{kernel\_shape}, \text{pads}, \text{dilations}$ and $\text{strides}$
-    - Statement:
-        - $dY_2 = \left\lfloor{(dX_2 + pad\_shape[0] - \texttt{dilations}[0] \times (\texttt{kernel\_shape}[0] - 1) - 1) / (strides[0] + 1)}\right\rfloor$
-        - $dY_3 = \left\lfloor{(dX_3 + pad\_shape[1] - \texttt{dilations}[1] \times (\texttt{kernel\_shape}[1] - 1) - 1) / (strides[1] + 1)} \right\rfloor$
-        - where $pad\_shape[i]$ is the sum of the pads along spatial axis $i$ 
-        - In the previous formula, `ceil_mode` is considered set to 0.
+- `[C1]`: Consistency between the shape of tensors $Y$, $X$, and attributes $\text{kernel\_shape}, \text{pads}, \text{dilations}$ and $\text{strides}$
+    - Statement: See constraint [<b><span style="font-family: 'Courier New', monospace">[C3]</span></b>](#shape_consist) on tensor $\text{dilations}$.
  
 
 ### $\text{Indices}$: `integer`
@@ -292,3 +330,407 @@ $Indices$ contains the indices of the input tensor $X$ from which the max values
 
  - `[C1]` <a id="C1iy"></a> First constraint on $Indices$
    - Statement: $Indices$ and $Y$ shall have the same shape
+
+
+## Formal specification
+
+[See Why3 specification](./formal/maxpool.mlw).
+
+## Numerical Accuracy
+*(To be completed)*
+
+
+<a id="float"></a>
+# **MaxPool** (float)
+where float is in {float16, float, double}
+
+
+## Signature
+$(Y, \textit{Indices}) = \textbf{MaxPool}(X)$
+
+where:
+- $X$: Input tensor
+- $Y$: Output tensor containing max value selected from $X$
+- $\textit{Indices}$: Output tensor containing the indices in $X$ from where the max values are taken.
+   
+## Restrictions
+
+See [Restrictions](#restrictions).
+
+
+## Informal specification
+
+Operator **MaxPool** consumes an input tensor $X$ and applies max pooling across the tensor according to the $\text {kernel\_shape}$, $\text{strides}$, $\text{dilations}$ and $\text{pads}$. Max pooling consists of computing the max on all values of a subset of the input tensor according to the kernel shape and downsampling the data into the output tensor $Y$.
+
+**MaxPool** is a sliding window operator like **Conv**, for instance. In contrast to **Conv**, the sliding window, called "kernel", or $W$. At a given position, the kernel is only there for indicating the set of elements of $X$ of which the maximum shall be computed. Therefore, only the shape of the kernel matters for **MaxPool**.
+
+Operator **MaxPool** stores in $Indices$ the indices of the input tensor $X$ from which the max values are taken. The index values are those of a flatten 1-D view of $X$.
+
+The mathematical definition of output $Y$ and $Indices$ are given hereafter:
+
+$$\begin{gathered}
+    Y[b, c, m, n] = \text{max}_{h=0}^{dW_0-1} \text{max}_{w=0}^{dW_1-1} \\ X_p[b,c,m \cdot \text{strides}[0]+ h \cdot \text{dilations}[0], n \cdot \text{strides}[1]+ w \cdot \text{dilations}[1] ]
+\end{gathered}$$
+
+$$\begin{gathered}
+   Indices[b, c, m, n] = (h \cdot dX_3 + w) ~~\text{if}~~ Y[b, c, m, n] = X[h,w] 
+\end{gathered}$$
+
+
+Where
+- $h \in [0,dX_2-1]$ is the index on the first spatial axis of $X_p$, whose dimension is $dX_2$.
+- $w \in [0,dX_3-1]$ is the index on the second spatial axis of $X_p$, whose dimension is $dX_3$.
+- $b \in [0,dY_0-1]$ is the batch index. $dY_0$ is the batch size of output $Y$
+- $c \in [0,dY_1-1]$ is the data channel. $dY_1$ is the number of data channels of output $Y$
+- $m \in [0,dY_2-1]$ is the index along the first spatial axis of output $Y$
+- $n \in [0,dY_3-1]$ is the index along the second spatial axis of output $Y$
+- $dW_0$ is the dimension of the first spatial axis of the kernel, i.e., the first value of attribute $\text{kernel\_shape}$
+- $dW_1$ is the dimension of the second spatial axis of the kernel, i.e., the second value of attribute $\text{kernel\_shape}$
+- $\text{strides}$ is an attribute of the operator. It will be described later in this section.
+- $\text{dilations}$ is an attribute of the operator. It will be described later in this section.
+- $X_{p} = \text{pad}(X,pads)$ is the padded version of the input tensor $X$. Function $\text{pad}$ applies padding as specified by attribute [pads](#real_pads).
+
+
+### Output shape calculation
+The shape of the output tensor $Y$ is determined by the shape of the input tensor $X$, and the values of attributes $\text{kernel\_shape}$, $\text{pads}$, $\text{dilations}$ and $\text{strides}$.
+
+$$
+Y_\textbf{shape} = \left(dX_0, dX_1, dY_2, dY_3\right)
+$$
+
+Where:
+
+- $dY_2 =  \displaystyle\left\lfloor{\frac{\alpha-\theta}{\text{strides}[0]}} \right\rfloor + 1$
+
+    <br>
+
+    - $\displaystyle\alpha = dX_2 + \text{pads}[0] + \text{pads}[2]$
+
+    <br>
+
+    - $\displaystyle\theta = \text{dilations}[0] * (\text{kernel\_shape}[0] - 1) + 1$
+
+<br>
+
+- $dY_3 =  \displaystyle\left\lfloor{\frac{\beta-\gamma}{\text{strides}[1]}} \right\rfloor + 1$
+
+    <br>
+
+    - $\displaystyle\beta = dX_3 + \text{pads}[1] + \text{pads}[3]$
+
+    <br>
+
+    - $\displaystyle\gamma = \text{dilations}[1] * (\text{kernel\_shape}[1] - 1) + 1$
+
+
+The effect of the operator is illustrated on the following examples.
+
+--- 
+### Example 1
+
+$S, Ind = \text{MaxPool}(E)$
+
+- Data type: double
+- Shape of $E$ = [1, 1, 3, 3]
+- kernel_shape = [2,2]
+- pads = [0,0,0,0]
+- dilation = [1,1]
+- strides = [1,1]
+- Shape of $Y$ = [1, 1, 2, 2]
+- Shape of $Ind$ = [1, 1, 2, 2]
+
+
+```math
+X =
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        1.70792822 & 1.59383029 & 2.22933891 \\
+        1.39774388 & 2.03411151 & 3.15139065 \\
+        2.81201102 & 5.85721996 & 3.55039159 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+```math
+Y =
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        2.03411151 & 3.15139065 \\
+        5.85721996 & 5.85721996 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+```math
+Indices = 
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        4 & 5 \\
+        7 & 7 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+--- 
+### Example 2
+
+$S, Ind = \text{MaxPool}(E)$
+
+- Data type: double
+- Shape of $E$ = [1, 1, 3, 3]
+- kernel\_shape = [2,2]
+- pads = [1,0,1,0]
+- dilation = [1,1]
+- strides = [1,1]
+- Shape of $Y$ = [1, 1, 4, 2]
+- Shape of $Ind$ = [1, 1, 4, 2]
+
+
+```math
+X =
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        2.41529657 & 0.12586645 & 5.17877496 \\
+        5.82770299 & 3.77328965 & 3.51988829 \\
+        1.40679595 & 3.95043140 & -1.37421443 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+```math
+Y =
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        2.41529657 & 5.17877496 \\
+        5.82770299 & 5.17877496 \\
+        5.82770299 & 3.95043140 \\
+        3.95043140 & 3.95043140 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+```math
+Indices = 
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        0 & 2 \\
+        3 & 2 \\
+        3 & 7 \\
+        7 & 7 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+---
+### Example 3
+
+$S, Ind = \text{MaxPool}(E)$
+
+- Data type: double
+- Shape of $E$ = [1, 1, 3, 3]
+- kernel\_shape = [2,2]
+- pads = [0,0,0,0]
+- dilation = [1,1]
+- strides = [1,1]
+- Shape of $Y$ = [1, 1, 2, 2]
+- Shape of $Ind$ = [1, 1, 2, 2]
+
+
+```math
+X =
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        -inf & -inf & 4.56432533 \\
+        -inf & -inf & 2.55354471 \\
+        2.83691720 & 3.46789489 & 5.23979851 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+```math
+Y =
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        -inf & 4.56432533e+000 \\
+        3.46789489e+000 & 5.23979851e+000 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+```math
+Indices = 
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        0 & 2 \\
+        7 & 8 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+--- 
+### Example 4
+
+$S, Ind = \text{MaxPool}(E)$
+
+- Data type: double
+- Shape of $E$ = [1, 1, 3, 3]
+- kernel\_shape = [2,2]
+- pads = [1,1,1,1]
+- dilation = [1,1]
+- strides = [1,1]
+- Shape of $Y$ = [1, 1, 4, 4]
+- Shape of $Ind$ = [1, 1, 4, 4]
+
+
+```math
+X =
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        -inf & 9.57875561 & 4.56432533 \\
+        2.72844928 & 3.54234851 & 2.55354471 \\
+        2.83691720 & 3.46789489 & 5.23979851 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+```math
+Y =
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        -inf & 9.57875561e+000 & 9.57875561e+000 & 4.56432533e+000 \\
+        2.72844928e+000 & 9.57875561e+000 & 9.57875561e+000 & 4.56432533e+000 \\
+        2.83691720e+000 & 3.54234851e+000 & 5.23979851e+000 & 5.23979851e+000 \\
+        2.83691720e+000 & 3.46789489e+000 & 5.23979851e+000 & 5.23979851e+000 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+```math
+Indices = 
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        0 & 1 & 1 & 2 \\
+        3 & 1 & 1 & 2 \\
+        6 & 4 & 8 & 8 \\
+        6 & 7 & 8 & 8 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+### Dicrepancies observed in an existing implementations
+
+**WARNING: Non compliances with the SONNX specification have been observed on the ONNX Runtime implementation (version 1.23.2).**
+
+Non compliance concern both the max values ($Y$) and the indices ($\text{indices}$).
+
+For instance, example 3 above executed on ONNX runtime with CPU provider produces the following output tensors:
+
+```math
+Y =
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        -1.79769313e+308 & 4.56432533e+000 \\
+        3.46789489e+000 & 5.23979851e+000 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+```math
+\text{Indices} = 
+\begin{bmatrix}
+  \begin{bmatrix}
+    \begin{bmatrix}
+        -4 & 2 \\
+        7 & 8 \\
+    \end {bmatrix}
+  \end {bmatrix}
+\end {bmatrix}
+```
+
+Two discrepancies appear:
+- in $Y$: -1.79769313e+308 instead of $-inf$ as first element.
+- in $Indices$: $-4$ instead of $0$ (first element of $X$).
+
+## Error conditions
+No error conditions.
+
+## Attributes
+
+For all attributes except $\text{pads}$, see section [<b><span style="font-family: 'Courier New', monospace">[MaxPool(real)->Attributes]</span></b>](#real_attributes).
+
+### $\text{pads}$: `list of ints`
+
+For the structural definition of $\text{pads}$, see [<b><span style="font-family: 'Courier New', monospace">[MaxPool(real)->Attributes->pads]</span></b>](#real_pads).
+
+<a id="pad_const_float_val"></a>
+The constant float value to pad is $-inf$.
+
+
+## Inputs
+
+### $\text{X}$: `floating-point tensor`
+
+$X$ is the input tensor from which the max values are selected. 
+
+
+#### Constraints
+
+See constraint [<b><span style="font-family: 'Courier New', monospace">[C1]</span></b>](#C1ia) on MaxPool(real) Input $X$.
+
+See constraint [<b><span style="font-family: 'Courier New', monospace">[C3]</span></b>](#shape_consist) on MaxPool(real) attribute $\text{dilations}$.
+
+
+See constraint [<b><span style="font-family: 'Courier New', monospace">[C3]</span></b>](#C1Xia) on MaxPool(real) Input $X$.
+
+## Outputs
+
+### $\text{Y}$: `floating-point tensor`
+
+The size of the output $Y$ will be $(dY_0 , dY_1 , dY_2 , dY_3)$ where
+- $dY_0$ is the number of batches
+- $dY_1$ is the number of channels
+- $dY_2$ and $dY_3$ are the sizes of the output for the two spatial axes
+
+#### Constraints.
+
+See constraint [<b><span style="font-family: 'Courier New', monospace">[C3]</span></b>](#shape_consist) on MaxPool(real) $\text{dilations}$.
+
+### $\text{Indices}$: `int64`
+$Indices$ contains the indices of the input tensor $X$ from which the max values are taken.
+
+#### Constraints
+
+ - `[C1]` <a id="C1iy"></a> First constraint on $Indices$
+   - Statement: $Indices$ and $Y$ shall have the same shape
+
+
+## Formal specification
+
+[See Why3 specification](./formal/maxpool.mlw).
+
+## Numerical Accuracy
+*(To be completed)*
