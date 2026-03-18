@@ -1,6 +1,6 @@
 #include "copreshape.h"
 
-void creshape(struct ctensor x, struct ctensor r, struct ctensorint32 s,
+void creshape(struct ctensor x, struct ctensor r, struct ctensorint64 s,
               int32_t allowzero) {
   int32_t m, i, o;
   m = cdim_size(r.t_dims, r.t_rank);

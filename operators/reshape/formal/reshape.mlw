@@ -118,14 +118,14 @@ module COPReshape
     use mach.int.Int32
     use std.Cfloat
     use libtensor.CTensor
-    use libtensor.CTensorInt32
+    use libtensor.CTensorInt64
     use tensor.Range
 
-    let creshape (x r: ctensor) (s: ctensorint32) (allowzero: int32)
+    let creshape (x r: ctensor) (s: ctensorint64) (allowzero: int32)
     requires { CTensor.valid_tensor x }
     requires { CTensor.valid_tensor r }
-    requires { CTensorInt32.valid_tensor s }
-    requires {  let y_shape = calculate_dims (CTensor.tensor x) (CTensorInt32.tensor s) allowzero in
+    requires { CTensorInt64.valid_tensor s }
+    requires {  let y_shape = calculate_dims (CTensor.tensor x) (CTensorInt64.tensor s) allowzero in
                 (ivector r.CTensor.t_dims r.CTensor.t_rank) = y_shape }
     requires { allowzero = 0 \/ allowzero = 1 }
     requires {  let rank = value_at s.t_dims 0 in
@@ -146,13 +146,13 @@ module COPReshape
                     (forall i. 0 <= i < rank ->
                         (value_at s.t_data i > 0 \/
                         (value_at s.t_data i = 0 -> ((exists d. 0 <= d < length (CTensor.tensor x).dims -> value_at x.CTensor.t_dims d = 0) /\ 
-                                                     (forall z. 0 <= z < rank -> value_at s.CTensorInt32.t_data z <> -1))) \/
-                        (value_at s.t_data i = -1 -> (forall z. 0 <= z < rank -> value_at s.CTensorInt32.t_data z <> 0))
+                                                     (forall z. 0 <= z < rank -> value_at s.CTensorInt64.t_data z <> -1))) \/
+                        (value_at s.t_data i = -1 -> (forall z. 0 <= z < rank -> value_at s.CTensorInt64.t_data z <> 0))
                         )
                     )
                 )
             }
-    requires { let y_shape = calculate_dims (CTensor.tensor x) (CTensorInt32.tensor s) allowzero in
+    requires { let y_shape = calculate_dims (CTensor.tensor x) (CTensorInt64.tensor s) allowzero in
                 size (CTensor.tensor x).dims = size y_shape }
     requires { s.t_rank = 1 }
     requires {  let rank = value_at s.t_dims 0 in
@@ -160,13 +160,13 @@ module COPReshape
                     (value_at s.t_data i = -1 /\ value_at s.t_data j = -1) -> (i = j) 
             }
 
-    ensures { CTensor.tensor r = reshape (CTensor.tensor x) (CTensorInt32.tensor s) (to_int allowzero) }
+    ensures { CTensor.tensor r = reshape (CTensor.tensor x) (CTensorInt64.tensor s) (to_int allowzero) }
     =
-    let ghost value = reshape (CTensor.tensor x) (CTensorInt32.tensor s) (to_int allowzero) in
+    let ghost value = reshape (CTensor.tensor x) (CTensorInt64.tensor s) (to_int allowzero) in
     let m = cdim_size r.CTensor.t_dims r.CTensor.t_rank in
     for i = 0 to m - 1 do
         invariant { forall k. 0 <= k < i -> value_at r.CTensor.t_data k = value_at x.CTensor.t_data k }
         r.CTensor.t_data[i] <- x.CTensor.t_data[i]
     done;
-    assert { CTensor.tensor r == reshape (CTensor.tensor x) (CTensorInt32.tensor s) (to_int allowzero) }
+    assert { CTensor.tensor r == reshape (CTensor.tensor x) (CTensorInt64.tensor s) (to_int allowzero) }
 end

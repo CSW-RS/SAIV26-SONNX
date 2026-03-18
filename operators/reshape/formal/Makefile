@@ -22,7 +22,7 @@ lib:
 	@echo "------------------------------------------"
 	@rm -fr $(CODE_DIR)
 	@why3 extract $(EXTRACT_LIB) libtensor.CTensor
-	@why3 extract $(EXTRACT_LIB) libtensor.CTensorInt32
+	@why3 extract $(EXTRACT_LIB) libtensor.CTensorInt64
 	@why3 extract $(EXTRACT_LIB) libvector.CIndex
 	@why3 extract $(EXTRACT_WHERE) reshape.COPReshape
 	@cd $(CODE_DIR) && gcc -c *.c

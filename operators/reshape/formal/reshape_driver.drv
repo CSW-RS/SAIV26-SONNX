@@ -30,6 +30,5 @@ module reshape.COPReshape
   interface "#include <stdint.h>"
   interface "#include \"cindex.h\""
   interface "#include \"ctensor.h\""
-  interface "#include \"ctensorint32.h\""
-  
+  interface "#include \"ctensorint64.h\""
 end
