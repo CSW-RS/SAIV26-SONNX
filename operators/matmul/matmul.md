@@ -1,6 +1,7 @@
 # Contents
-- **MatMul** operator for type [real](#real)
-- **MatMul** operator for types [float16, float32, float64](#float)
+- **MatMul** operator for type [(real,real)](#real)
+- **MatMul** operator for types [(float,float)](#float)
+  - where `float` in { float16, float32, float64}
 
 Based on ONNX documentation [MatMul version 13](https://onnx.ai/onnx/operators/onnx__MatMul.html).
 
