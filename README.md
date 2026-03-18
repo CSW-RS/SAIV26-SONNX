@@ -104,8 +104,8 @@ cd operators/add/formal
 
 # Launch the Why3 IDE
 why3 ide -L ../../../tensor/tensor add.mlw
-
 ```
+
 The path that follows the `-L` flag points to the directory containing the foundation modules (e.g., `tensor.mlw`, `layout.mlw`, etc.) that are required to load the operator's specification.
 
 The IDE will load the file, display all proof obligations (goals), and show the status of each goal proved because proofs are already uploaded in the folder `operators/add/formal/add`.
