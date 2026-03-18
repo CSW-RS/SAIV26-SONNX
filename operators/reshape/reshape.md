@@ -24,11 +24,11 @@ No specific restrictions apply to the **Reshape** operator.
 
 Operator **Reshape** transforms the input tensor into an output tensor with the shape specified in $S$.
 
-The reshape operation depends on the attribute `allowzero`. If:
+The reshape operation depends on the attribute $\text{allowzero}$. If:
 
-- `allowzero = 0`: Any dimension **equal to $0$** in $S$ means copying the respective dimension from the input tensor $X$.
+- $\text{allowzero} = 0$: Any dimension **equal to $0$** in $S$ means copying the respective dimension from the input tensor $X$.
  
-- `allowzero = 1`: Any dimension **equal to $0$** in $S$ means that the respective dimension in the output tensor $Y$ should be null.
+- $\text{allowzero} = 1$: Any dimension **equal to $0$** in $S$ means that the respective dimension in the output tensor $Y$ should be null.
 
 It is possible to have **at most one dimension in $S$ with value -1**. In such case that dimension is inferred from the size of the input tensor $X$ and the remaining dimensions in $S$.
  
@@ -62,7 +62,7 @@ X = \begin{bmatrix}
 ```
 
 ```math
-allowzero = 0
+\text{allowzero} = 0
 ```
 
 ```math
@@ -91,7 +91,7 @@ X = \begin{bmatrix}
 ```
 
 ```math
-allowzero = 0
+\text{allowzero} = 0
 ```
  
 ```math
@@ -135,7 +135,7 @@ X = \begin{bmatrix}
 ```
 
 ```math
-allowzero = 1
+\text{allowzero} = 1
 ```
  
 ```math
@@ -168,7 +168,7 @@ X_\text{shape} = [0, 3, 8]
 ```
 
 ```math
-allowzero = 1
+\text{allowzero} = 1
 ```
  
 ```math
@@ -196,7 +196,7 @@ If set to 0, dimensions in $S$ with value 0 will copy the size from the correspo
  
 If set to 1, any 0 in $S$ means that the size of that dimension should be 0.
 
-For any value other than 0 in $S$, the respective value will be kept (regardless of the value of `allowzero`).
+For any value other than 0 in $S$, the respective value will be kept (regardless of the value of $\text{allowzero}$).
 
 
 #### Constraints
@@ -206,29 +206,29 @@ For any value other than 0 in $S$, the respective value will be kept (regardless
       - $\text{allowzero} \in \{0, 1\} $
  
   - `[C2]` <a id="C1ra"></a> Dimension size copying from input tensor $X$
-    - Statement: With `allowzero = 0` only valid dimensions can be copied from the input tensor $X$:
+    - Statement: With $\text{allowzero} = 0$ only valid dimensions can be copied from the input tensor $X$:
       - $\forall i \in [0, dS - 1]. \quad S[i] = 0 \implies i < rX$
  
     - Rationale: Only valid dimensions in $X$ can be copied to the output.
   
   - `[C3]` <a id="C2ra"></a> Value domain in $S$
     - Statement:
-      - If `allowzero = 0`:
+      - If $\text{allowzero} = 0$:
 
         $$\forall i \in [0, dS_0 - 1] . \quad S[i] >= -1 \quad \land \quad $$
         $$(\exists j \in [0, dS_0 - 1]. \quad S[j] = -1) \implies (\forall d \in [0, rX - 1]. \quad dX_d \neq 0)$$
       <br>
 
-      - If `allowzero = 1`: 
+      - If $\text{allowzero} = 1$: 
       
         $$\forall i \in [0, dS_0 - 1]. \quad S[i] > 0 \quad \lor\\$$
         $$(S[i] = 0 \implies ((\exists d \in [0, rX - 1]. \quad dX_d = 0) \quad \land \quad (\forall  z \in [0, dS_0 - 1]. \quad S[z] \neq -1) )) \quad \lor\\$$
         $$(S[i] = -1 \quad \implies (\forall  z \in [0, dS_0 - 1]. \quad S[z] \neq 0))$$
  
     - Rationale:
-      - `allowzero = 0`: Auto inference is not compatible with null tensors (division by 0).
+      - $\text{allowzero} = 0$: Auto inference is not compatible with null tensors (division by 0).
       
-      - `allowzero = 1`: Dimensions equal to `0` or `1` are mutually incompatible. Null tensors are only feasible ate output if the input is also null.
+      - $\text{allowzero} = 1$: Dimensions equal to $0$ or $1$ are mutually incompatible. Null tensors are only feasible ate output if the input is also null.
  
 ## Inputs
  

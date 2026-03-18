@@ -118,32 +118,32 @@ No error condition
 
 ## Inputs
 
-### $X$: `real tensor`
+### $\text{X}$: `real tensor`
 Tensor $X$ is the input tensor to be flattened.
 
 ### Constraints
 
- - `[C1]` <a id="C1ra"></a> Consistency between the shape of tensor $X$ and attribute `axis`
+ - `[C1]` <a id="C1ra"></a> Consistency between the shape of tensor $X$ and attribute $\text{axis}$
    - Statement: $rX \geq \text{axis}$
    
-   - Rationale: Ensures that the specified axis is valid for the given tensor rank.
+   - Rationale: Ensures that the specified $\text{axis}$ is valid for the given tensor rank.
  
 ## Attributes
 
-### axis: `integer`
+### $\text{axis}$: `integer`
 The axis starting from which the input tensor will be flattened into the second dimension of the output.
 
 ### Constraints
- - `[C1]` <a id="C1ra"></a> Consistency between the shape of tensor $X$ and attribute `axis`
+ - `[C1]` <a id="C1ra"></a> Consistency between the shape of tensor $X$ and attribute $\text{axis}$
     - Statement: see constraint [<b><span style="font-family: 'Courier New', monospace">[C1]</span></b>](#C1ra) on tensor $X$.
 
  - `[C2]` <a id="C2ra"></a> Value domain
     - Statement: $\text{axis} \in [-rX, rX]$
-    - Rationale: Ensures that the attribute `axis` is a valid axis for tensor $X$
+    - Rationale: Ensures that the attribute $\text{axis}$ is a valid axis for tensor $X$
 
 ## Outputs
 
-### $Y$: `real tensor`
+### $\text{Y}$: `real tensor`
 Tensor $Y$ is the flattened output tensor.
 
 ### Constraints
