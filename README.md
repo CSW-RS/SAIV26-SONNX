@@ -1,6 +1,6 @@
 # SAIV26
 
-This repository serves as the companion artifact for a paper to be published at the **Conference XXXXX**.
+This repository serves as the companion artifact for a paper submitted to the SAIV'26 Symposium.
 
 This work is a specific and concrete fork of a much broader initiative called [SONNX](https://github.com/ericjenn/working-groups/tree/ericjenn-srpwg-wg1/safety-related-profile/sonnx), whose goal is to develop a **safe profile for Machine Learning**, based on the [ONNX](https://onnx.ai/) framework. While the SONNX project covers the full scope of building a verified ML inference stack, this repository focuses on a well-defined subset of operators and presents the formal verification methodology and results discussed in the paper.
 
@@ -12,26 +12,26 @@ The repository is organized into two main directories:
 
 ```
 SAIV26/
-├── tensor/                 # Core tensor library (shared across all operators)
-│   ├── code/               # Extracted C code (ctensor, cindex)
-│   ├── drivers/            # Why3 extraction drivers (.drv)
-│   └── tensor/             # Why3 formal specifications (.mlw)
+├── tensor/                      # Core tensor library (shared across all operators)
+│   ├── code/                    # Extracted C code (ctensor, cindex)
+│   ├── drivers/                 # Why3 extraction drivers (.drv)
+│   └── tensor/                  # Why3 formal specifications (.mlw)
 │
-|── operators/              # Neural network operator specifications
-|   ├── add/                # Addition
-|       ├── code/           # C operator extracted code
-|       ├── formal/         # Why3 formal specifications (.mlw)
-|       └── add.md          # Informal specification (Markdown)
-|   ├── sigmoid/
-|       ├── code/
-|       ├── formal/
-|       └── sigmoid.md
-|   ├── (...)               # Other operators
-|   └── general_definitions # General definitions
+|── operators/                   # Neural network operator specifications
+|   ├── add/                     # Addition
+|       ├── code/                # C operator extracted code
+|       ├── formal/              # Why3 formal specifications (.mlw)
+|       └── add.md               # Informal specification (Markdown)
+|   ├── sigmoid/                 
+|       ├── code/                
+|       ├── formal/              
+|       └── sigmoid.md           
+|   ├── (...)                    # Other operators
+|   └── general_definitions      # General definitions
 |
-└── networks/               # Network specifications
-    ├── lR                  # Logistic regression informal specification
-    └── logisticRegression/ # Logistic regression formal specification
+└── networks/                    # Network specifications
+    ├── logisticRegression.md    # Logistic regression informal specification
+    └── logisticRegression.mlw   # Logistic regression formal specification
 ```
 ---
 
@@ -39,7 +39,7 @@ SAIV26/
 
 Each operator has a Markdown document (e.g., `add.md`, `conv.md`, `matmul.md`) that serves as its **informal specification**. These documents provide a description of the operator at three levels of detail: **textual, mathematical, and example-based**. 
 
-It also presents the operator's **inputs** and **attributes**, whose restrictions are explicitly specified according both to the ONNX specification and to the SOONX profile.
+It also presents the operator's **inputs** and **attributes**, whose restrictions are explicitly specified according both to the ONNX specification and to the SONNX profile.
 
 These specifications are written for human consumption and serve as the reference from which the formal specifications are derived.
 
@@ -80,7 +80,7 @@ Provides the core definitions for the formalization. Thses modules include:
 
 ### Prerequisites
 
-To replicate the proofs you should have the following tools installed (please take into consideration that the solvers and why3 versions are important to ensure the proofs can be replayed without issues):
+To replicate the proofs you should have the following tools installed (please take into consideration that the solvers and Why3 versions are important to ensure the proofs can be replayed without issues):
 
 - [Why3](https://www.why3.org/) - version 1.8.0
 
@@ -110,14 +110,38 @@ The path that follows the `-L` flag points to the directory containing the found
 
 The IDE will load the file, display all proof obligations (goals), and show the status of each goal proved because proofs are already uploaded in the folder `operators/add/formal/add`.
 
-To replay a given operator proofs you can either launch the IDE and select the command *Reset Proofs* under the *Tools* menu, or you can delete the `add` - `operators/add/formal/add` - folder and re-run the command.
+To replay a given operator proofs you can either launch the IDE and select the command *Reset Proofs* under the *Tools* menu, or you can delete the `add` folder (`operators/add/formal/add`) and re-run the command.
+
+**Note:** When replaying proofs, you may need to increase the solver timeout. This can be configured in Why3 under *File > Preferences*, and then applying the desired solver to the corresponding verification condition (VC). Additionally, some proofs rely on specific transformations and instantiations applied through the Why3 IDE. To successfully replay these proofs, the same transformations must be reapplied. The required transformations are recorded in the `why3session.xml` file located in the proof folder of each operator.
 
 ### Code Extraction
-This will:
-1. Extract the shared tensor library modules (`CTensor`, `CIndex`) to C.
-2. Extract the operator-specific module (e.g., `COPAdd`) to C using the operator's driver file.
-3. Compile the extracted C files with `gcc` to verify they are syntactically valid.
-4. List the generated files in the `code/` directory.
+
+To extract C code from the Why3 specifications, you need to configure the Why3 loadpath.
+
+To do this, locate your `why3.conf` file and add the following path to the loadpath section:
+```
+"/absolute/path/to/saiv/tensor/tensor"
+```
+
+Replace `/absolute/path/to/` with the actual path to the repository on your system.
+
+Once the loadpath is configured, you can extract C code using the Makefiles available in each operator's `formal/` directory and in the tensor module.
+
+To perform the extraction:
+
+```bash
+# Navigate to the formal directory of an operator or the tensor module
+cd tensor/tensor/        # For the tensor library
+# or
+cd operators/add/formal/ # For a specific operator
+
+# Run the extraction
+make
+```
+
+The extraction process removes any existing `code/` directory and generates C code from the Why3 modules using the configured drivers. For the tensor library, this includes modules such as `libvector.CIndex`, `libtensor.CTensor`, and `libtensor.CTensorInt64`.
+
+The generated C files are then compiled with `gcc` to verify syntactic correctness, and all output files are listed for inspection in the `code/` directory.
 
 To clean generated files:
 
