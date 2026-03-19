@@ -49,9 +49,6 @@ module OPMatmul
     requires { a.background = b.background }
     requires { length a.dims = length b.dims = 2 }
     requires { get_dim a.dims 1 = get_dim b.dims 0 }
-    ensures { result.background = a.background }
-    ensures { result.dims = Cons (get_dim a.dims 0) (Cons (get_dim b.dims 1) Nil) }
-    ensures { result.data = dmatmul a b (get_dim a.dims 0) (get_dim b.dims 1) }
     =
     { dims = Cons (get_dim a.dims 0) (Cons (get_dim b.dims 1) Nil) ; data = dmatmul a b (get_dim a.dims 0) (get_dim b.dims 1) ; background = a.background }
  
@@ -75,7 +72,7 @@ module COPMatmul
     use std.Cfloat
     use std.Int
     use list.Length
- 
+
  
     let rec lemma valid_bounds (ks ds: iarray) (p q: int)
       requires { p <= q }

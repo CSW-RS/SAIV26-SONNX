@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "https://www.why3.org/why3session.dtd">
 <why3session shape_version="6">
-<prover id="0" name="CVC4" version="1.8" timelimit="5" steplimit="0" memlimit="2000"/>
+<prover id="0" name="CVC4" version="1.8" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="1" name="Alt-Ergo" version="2.6.2" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="2" name="CVC5" version="1.2.1" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="3" name="Z3" version="4.13.4" timelimit="1" steplimit="0" memlimit="1000"/>
@@ -12,226 +12,272 @@
  <goal name="dot_product&#39;vc" expl="VC for dot_product" proved="true">
  <proof prover="3"><result status="valid" time="0.021848" steps="18501"/></proof>
  </goal>
- <goal name="dot_product_aux_step&#39;vc" expl="VC for dot_product_aux_step" proved="true">
+ <goal name="recursive_step&#39;vc" expl="VC for recursive_step" proved="true">
  <proof prover="1"><result status="valid" time="0.170033" steps="12879"/></proof>
  </goal>
  <goal name="matmul&#39;vc" expl="VC for matmul" proved="true">
- <proof prover="3"><result status="valid" time="0.022932" steps="57024"/></proof>
+ <proof prover="2"><result status="valid" time="0.118208" steps="12594"/></proof>
  </goal>
 </theory>
 <theory name="COPMatmul" proved="true">
- <goal name="valid_bounds_2&#39;vc" expl="VC for valid_bounds_2" proved="true">
+ <goal name="valid_bounds&#39;vc" expl="VC for valid_bounds" proved="true">
  <proof prover="1"><result status="valid" time="0.099139" steps="1715"/></proof>
  </goal>
- <goal name="matmul&#39;vc" expl="VC for matmul" proved="true">
+ <goal name="cmatmul&#39;vc" expl="VC for cmatmul" proved="true">
  <transf name="split_vc" proved="true" >
-  <goal name="matmul&#39;vc.0" expl="precondition" proved="true">
+  <goal name="cmatmul&#39;vc.0" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.004009" steps="7763"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.1" expl="precondition" proved="true">
+  <goal name="cmatmul&#39;vc.1" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.003914" steps="7942"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.2" expl="precondition" proved="true">
+  <goal name="cmatmul&#39;vc.2" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.011839" steps="11657"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.3" expl="precondition" proved="true">
+  <goal name="cmatmul&#39;vc.3" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.011101" steps="15337"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.4" expl="precondition" proved="true">
+  <goal name="cmatmul&#39;vc.4" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.007585" steps="8007"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.5" expl="assertion" proved="true">
+  <goal name="cmatmul&#39;vc.5" expl="assertion" proved="true">
   <transf name="inline_goal" proved="true" >
-   <goal name="matmul&#39;vc.5.0" expl="assertion" proved="true">
+   <goal name="cmatmul&#39;vc.5.0" expl="assertion" proved="true">
    <transf name="split_all_full" proved="true" >
-    <goal name="matmul&#39;vc.5.0.0" expl="assertion" proved="true">
-    <proof prover="2" timelimit="5" memlimit="2000"><result status="valid" time="1.719565" steps="122470"/></proof>
+    <goal name="cmatmul&#39;vc.5.0.0" expl="assertion" proved="true">
+    <proof prover="0" timelimit="30" memlimit="4000"><result status="timeout" time="30.000000" steps="1251866"/></proof>
+    <proof prover="1" timelimit="30" memlimit="4000"><result status="timeout" time="30.000000" steps="389892"/></proof>
+    <proof prover="2" timelimit="30" memlimit="4000"><result status="timeout" time="30.000000"/></proof>
+    <proof prover="3" timelimit="30" memlimit="4000"><result status="timeout" time="25.640262" steps="40436766"/></proof>
+    <transf name="compute_in_goal" proved="true" >
+     <goal name="cmatmul&#39;vc.5.0.0.0" expl="assertion" proved="true">
+     <proof prover="2"><result status="valid" time="0.847587" steps="87471"/></proof>
+     </goal>
+    </transf>
     </goal>
    </transf>
    </goal>
   </transf>
   </goal>
-  <goal name="matmul&#39;vc.6" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.276549" steps="34132"/></proof>
+  <goal name="cmatmul&#39;vc.6" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.276549" steps="28824"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.7" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.290696" steps="34196"/></proof>
+  <goal name="cmatmul&#39;vc.7" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.290696" steps="28859"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.8" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.278868" steps="34158"/></proof>
+  <goal name="cmatmul&#39;vc.8" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.278868" steps="28861"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.9" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.007575" steps="9032"/></proof>
+  <goal name="cmatmul&#39;vc.9" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.007800" steps="8296"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.10" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.015337" steps="13243"/></proof>
+  <goal name="cmatmul&#39;vc.10" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.010821" steps="12255"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.11" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.007800" steps="9423"/></proof>
+  <goal name="cmatmul&#39;vc.11" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.007575" steps="8687"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.12" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.016872" steps="13740"/></proof>
+  <goal name="cmatmul&#39;vc.12" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.016872" steps="12752"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.13" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.020261" steps="9491"/></proof>
+  <goal name="cmatmul&#39;vc.13" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.008153" steps="8755"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.14" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.010821" steps="13856"/></proof>
+  <goal name="cmatmul&#39;vc.14" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.015337" steps="12868"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.15" expl="integer overflow" proved="true">
-  <proof prover="3"><result status="valid" time="0.088072" steps="222221"/></proof>
+  <goal name="cmatmul&#39;vc.15" expl="integer overflow" proved="true">
+  <proof prover="3"><result status="valid" time="0.088072" steps="212831"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.16" expl="loop invariant init" proved="true">
-  <proof prover="3"><result status="valid" time="0.007967" steps="9851"/></proof>
+  <goal name="cmatmul&#39;vc.16" expl="loop invariant init" proved="true">
+  <proof prover="3"><result status="valid" time="0.007967" steps="9115"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.17" expl="loop invariant init" proved="true">
-  <proof prover="3"><result status="valid" time="0.007378" steps="9932"/></proof>
+  <goal name="cmatmul&#39;vc.17" expl="loop invariant init" proved="true">
+  <proof prover="3"><result status="valid" time="0.007378" steps="9733"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.18" expl="integer overflow" proved="true">
-  <proof prover="3"><result status="valid" time="0.078855" steps="248994"/></proof>
+  <goal name="cmatmul&#39;vc.18" expl="integer overflow" proved="true">
+  <proof prover="3"><result status="valid" time="0.078855" steps="243851"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.19" expl="loop invariant init" proved="true">
-  <proof prover="3"><result status="valid" time="0.017247" steps="11005"/></proof>
+  <goal name="cmatmul&#39;vc.19" expl="loop invariant init" proved="true">
+  <proof prover="3"><result status="valid" time="0.017247" steps="10806"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.20" expl="loop invariant init" proved="true">
-  <proof prover="3"><result status="valid" time="0.066854" steps="224604"/></proof>
+  <goal name="cmatmul&#39;vc.20" expl="loop invariant init" proved="true">
+  <proof prover="3"><result status="valid" time="0.066854" steps="218665"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.21" expl="loop invariant init" proved="true">
-  <proof prover="3"><result status="valid" time="0.012205" steps="11177"/></proof>
+  <goal name="cmatmul&#39;vc.21" expl="loop invariant init" proved="true">
+  <proof prover="3"><result status="valid" time="0.012205" steps="10978"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.22" expl="integer overflow" proved="true">
-  <proof prover="3"><result status="valid" time="0.094226" steps="265923"/></proof>
+  <goal name="cmatmul&#39;vc.22" expl="integer overflow" proved="true">
+  <proof prover="3"><result status="valid" time="0.094226" steps="259500"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.23" expl="loop invariant init" proved="true">
-  <proof prover="3"><result status="valid" time="0.061467" steps="234051"/></proof>
+  <goal name="cmatmul&#39;vc.23" expl="loop invariant init" proved="true">
+  <proof prover="3"><result status="valid" time="0.061467" steps="229030"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.24" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.016196" steps="23302"/></proof>
+  <goal name="cmatmul&#39;vc.24" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.016196" steps="22887"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.25" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.007945" steps="17625"/></proof>
+  <goal name="cmatmul&#39;vc.25" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.007945" steps="17308"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.26" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.010400" steps="23809"/></proof>
+  <goal name="cmatmul&#39;vc.26" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.010400" steps="23394"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.27" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.023281" steps="18002"/></proof>
+  <goal name="cmatmul&#39;vc.27" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.023281" steps="17685"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.28" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.016588" steps="24053"/></proof>
+  <goal name="cmatmul&#39;vc.28" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.016588" steps="23638"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.29" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.015986" steps="18178"/></proof>
+  <goal name="cmatmul&#39;vc.29" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.015986" steps="17861"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.30" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.007234" steps="24311"/></proof>
+  <goal name="cmatmul&#39;vc.30" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.007234" steps="23896"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.31" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.007138" steps="18364"/></proof>
+  <goal name="cmatmul&#39;vc.31" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.007138" steps="18047"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.32" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.008153" steps="12301"/></proof>
+  <goal name="cmatmul&#39;vc.32" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.020261" steps="12102"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.33" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.086453" steps="297142"/></proof>
+  <goal name="cmatmul&#39;vc.33" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.086453" steps="289152"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.34" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.079436" steps="250868"/></proof>
+  <goal name="cmatmul&#39;vc.34" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.079436" steps="245753"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.35" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.076963" steps="253285"/></proof>
+  <goal name="cmatmul&#39;vc.35" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.076963" steps="248170"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.36" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.427072" steps="42729"/></proof>
+  <goal name="cmatmul&#39;vc.36" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.427072" steps="41290"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.37" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.011642" steps="12314"/></proof>
+  <goal name="cmatmul&#39;vc.37" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.011642" steps="12115"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.38" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.108843" steps="309855"/></proof>
+  <goal name="cmatmul&#39;vc.38" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.108843" steps="301865"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.39" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.097585" steps="314360"/></proof>
+  <goal name="cmatmul&#39;vc.39" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.097585" steps="306068"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.40" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.101270" steps="257174"/></proof>
+  <goal name="cmatmul&#39;vc.40" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.101270" steps="252059"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.41" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.437345" steps="43221"/></proof>
+  <goal name="cmatmul&#39;vc.41" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.437345" steps="41719"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.42" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.012691" steps="12327"/></proof>
+  <goal name="cmatmul&#39;vc.42" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.012691" steps="12128"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.43" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.007292" steps="12358"/></proof>
+  <goal name="cmatmul&#39;vc.43" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.007292" steps="12159"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.44" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.065914" steps="257898"/></proof>
+  <goal name="cmatmul&#39;vc.44" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.065914" steps="252793"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.45" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.020888" steps="79568"/></proof>
+  <goal name="cmatmul&#39;vc.45" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.020888" steps="78140"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.46" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.145016" steps="346327"/></proof>
+  <goal name="cmatmul&#39;vc.46" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.145016" steps="331407"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.47" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.102223" steps="20891"/></proof>
+  <goal name="cmatmul&#39;vc.47" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.102223" steps="20758"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.48" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.046558" steps="228100"/></proof>
+  <goal name="cmatmul&#39;vc.48" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.046558" steps="223930"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.49" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.146515" steps="349293"/></proof>
+  <goal name="cmatmul&#39;vc.49" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.146515" steps="334373"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.50" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.118122" steps="20952"/></proof>
+  <goal name="cmatmul&#39;vc.50" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.118122" steps="20819"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.51" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.521694" steps="53429"/></proof>
+  <goal name="cmatmul&#39;vc.51" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.521694" steps="51649"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.52" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.503783" steps="53037"/></proof>
+  <goal name="cmatmul&#39;vc.52" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.503783" steps="51294"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.53" expl="assertion" proved="true">
+  <goal name="cmatmul&#39;vc.53" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.53.0" expl="assertion" proved="true">
+   <goal name="cmatmul&#39;vc.53.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="99787"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="38431"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.024760" steps="3913347"/></proof>
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.53.0.0" expl="assertion" proved="true">
+    <goal name="cmatmul&#39;vc.53.0.0" expl="assertion" proved="true">
+    <proof prover="0" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="376935"/></proof>
+    <proof prover="1" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="151869"/></proof>
+    <proof prover="2" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000"/></proof>
+    <proof prover="3" timelimit="5" memlimit="2000"><result status="timeout" time="4.277277" steps="7545539"/></proof>
     <transf name="inline_goal" proved="true" >
-     <goal name="matmul&#39;vc.53.0.0.0" expl="assertion" proved="true">
+     <goal name="cmatmul&#39;vc.53.0.0.0" expl="assertion" proved="true">
      <transf name="split_all_full" proved="true" >
-      <goal name="matmul&#39;vc.53.0.0.0.0" expl="assertion" proved="true">
-      <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="18.339023" steps="616467"/></proof>
+      <goal name="cmatmul&#39;vc.53.0.0.0.0" expl="assertion" proved="true">
+      <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="12.785237" steps="521822"/></proof>
       </goal>
      </transf>
      </goal>
     </transf>
     </goal>
-    <goal name="matmul&#39;vc.53.0.1" expl="assertion" proved="true">
-    <proof prover="3"><result status="valid" time="0.020923" steps="10654"/></proof>
+    <goal name="cmatmul&#39;vc.53.0.1" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.011615" steps="10455"/></proof>
     </goal>
    </transf>
    </goal>
-   <goal name="matmul&#39;vc.53.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.012380" steps="10625"/></proof>
+   <goal name="cmatmul&#39;vc.53.1" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.53.1.0" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.020923" steps="10426"/></proof>
+    </goal>
+    <goal name="matmul&#39;vc.53.0.0" expl="assertion">
+    <transf name="inline_goal" >
+     <goal name="matmul&#39;vc.53.0.0.0" expl="assertion">
+     <transf name="split_all_full" >
+      <goal name="matmul&#39;vc.53.0.0.0.0" expl="assertion">
+      <proof prover="0"><undone/></proof>
+      <proof prover="1"><undone/></proof>
+      <proof prover="2"><undone/></proof>
+      <proof prover="3"><undone/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
    </goal>
   </transf>
   </goal>
-  <goal name="matmul&#39;vc.54" expl="assertion" proved="true">
-  <proof prover="3"><result status="valid" time="0.178359" steps="356265"/></proof>
+  <goal name="cmatmul&#39;vc.54" expl="assertion" proved="true">
+  <proof prover="3"><result status="valid" time="0.178359" steps="343501"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.55" expl="assertion" proved="true">
+  <goal name="cmatmul&#39;vc.55" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.55.0" expl="assertion" proved="true">
+   <goal name="cmatmul&#39;vc.55.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="95906"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="39413"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.015296" steps="3686027"/></proof>
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.55.0.0" expl="assertion" proved="true">
+    <goal name="cmatmul&#39;vc.55.0.0" expl="assertion" proved="true">
+    <proof prover="0" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="367344"/></proof>
+    <proof prover="1" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="152220"/></proof>
+    <proof prover="2" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000"/></proof>
+    <proof prover="3" timelimit="5" memlimit="2000"><result status="timeout" time="4.280877" steps="7396376"/></proof>
     <transf name="inline_goal" proved="true" >
-     <goal name="matmul&#39;vc.55.0.0.0" expl="assertion" proved="true">
+     <goal name="cmatmul&#39;vc.55.0.0.0" expl="assertion" proved="true">
      <transf name="split_all_full" proved="true" >
-      <goal name="matmul&#39;vc.55.0.0.0.0" expl="assertion" proved="true">
+      <goal name="cmatmul&#39;vc.55.0.0.0.0" expl="assertion" proved="true">
+      <proof prover="0"><result status="timeout" time="1.000000" steps="91627"/></proof>
+      <proof prover="1"><result status="timeout" time="1.000000" steps="33184"/></proof>
+      <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+      <proof prover="3"><result status="timeout" time="1.000000" steps="1671846"/></proof>
       <transf name="split_vc" proved="true" >
-       <goal name="matmul&#39;vc.55.0.0.0.0.0" expl="assertion" proved="true">
-       <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="17.580098" steps="654228"/></proof>
+       <goal name="cmatmul&#39;vc.55.0.0.0.0.0" expl="assertion" proved="true">
+       <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="9.379353" steps="398467"/></proof>
        </goal>
       </transf>
       </goal>
@@ -239,55 +285,27 @@
      </goal>
     </transf>
     </goal>
-    <goal name="matmul&#39;vc.55.0.1" expl="assertion" proved="true">
-    <proof prover="3"><result status="valid" time="0.015851" steps="10970"/></proof>
+    <goal name="cmatmul&#39;vc.55.0.1" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.008051" steps="10771"/></proof>
     </goal>
    </transf>
    </goal>
-   <goal name="matmul&#39;vc.55.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.007648" steps="10941"/></proof>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="matmul&#39;vc.56" expl="assertion" proved="true">
-  <proof prover="3"><result status="valid" time="0.174352" steps="356786"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.57" expl="loop invariant preservation" proved="true">
-  <proof prover="1"><result status="valid" time="0.307421" steps="7260"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.58" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.016495" steps="23272"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.59" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.016415" steps="17603"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.60" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.004023" steps="23779"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.61" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.011735" steps="17980"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.62" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.079749" steps="244593"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.63" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.092247" steps="291842"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.64" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.134573" steps="20158"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.65" expl="assertion" proved="true">
-  <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.65.0" expl="assertion" proved="true">
+   <goal name="cmatmul&#39;vc.55.1" expl="assertion" proved="true">
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.65.0.0" expl="assertion" proved="true">
-    <transf name="inline_goal" proved="true" >
-     <goal name="matmul&#39;vc.65.0.0.0" expl="assertion" proved="true">
-     <transf name="split_all_full" proved="true" >
-      <goal name="matmul&#39;vc.65.0.0.0.0" expl="assertion" proved="true">
-      <transf name="split_vc" proved="true" >
-       <goal name="matmul&#39;vc.65.0.0.0.0.0" expl="assertion" proved="true">
-       <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="7.173809" steps="276893"/></proof>
+    <goal name="cmatmul&#39;vc.55.1.0" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.015851" steps="10742"/></proof>
+    </goal>
+    <goal name="matmul&#39;vc.55.0.0" expl="assertion">
+    <transf name="inline_goal" >
+     <goal name="matmul&#39;vc.55.0.0.0" expl="assertion">
+     <transf name="split_all_full" >
+      <goal name="matmul&#39;vc.55.0.0.0.0" expl="assertion">
+      <transf name="split_vc" >
+       <goal name="matmul&#39;vc.55.0.0.0.0.0" expl="assertion">
+       <proof prover="0"><undone/></proof>
+       <proof prover="1"><undone/></proof>
+       <proof prover="2"><undone/></proof>
+       <proof prover="3"><undone/></proof>
        </goal>
       </transf>
       </goal>
@@ -295,180 +313,406 @@
      </goal>
     </transf>
     </goal>
-    <goal name="matmul&#39;vc.65.0.1" expl="assertion" proved="true">
-    <proof prover="3"><result status="valid" time="0.007780" steps="10623"/></proof>
-    </goal>
    </transf>
-   </goal>
-   <goal name="matmul&#39;vc.65.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.016621" steps="10594"/></proof>
    </goal>
   </transf>
   </goal>
-  <goal name="matmul&#39;vc.66" expl="assertion" proved="true">
+  <goal name="cmatmul&#39;vc.56" expl="assertion" proved="true">
+  <proof prover="3"><result status="valid" time="0.174352" steps="345555"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.57" expl="loop invariant preservation" proved="true">
+  <proof prover="1"><result status="valid" time="0.307421" steps="6489"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.58" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.016495" steps="22857"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.59" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.016415" steps="17286"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.60" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.004023" steps="23364"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.61" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.011735" steps="17663"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.62" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.079749" steps="239484"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.63" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.092247" steps="283852"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.64" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.134573" steps="20025"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.65" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.66.0" expl="assertion" proved="true">
+   <goal name="cmatmul&#39;vc.65.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="120102"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="18468"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.033242" steps="3587686"/></proof>
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.66.0.0" expl="assertion" proved="true">
-    <proof prover="1" timelimit="30" memlimit="4000"><result status="valid" time="8.408455" steps="355314"/></proof>
+    <goal name="cmatmul&#39;vc.65.0.0" expl="assertion" proved="true">
+    <proof prover="0" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="433372"/></proof>
+    <proof prover="1" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="167091"/></proof>
+    <proof prover="2" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000"/></proof>
+    <proof prover="3" timelimit="5" memlimit="2000"><result status="timeout" time="4.159599" steps="7497842"/></proof>
+    <transf name="inline_goal" proved="true" >
+     <goal name="cmatmul&#39;vc.65.0.0.0" expl="assertion" proved="true">
+     <transf name="split_all_full" proved="true" >
+      <goal name="cmatmul&#39;vc.65.0.0.0.0" expl="assertion" proved="true">
+      <proof prover="0"><result status="timeout" time="1.000000" steps="86723"/></proof>
+      <proof prover="1"><result status="timeout" time="1.000000" steps="17641"/></proof>
+      <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+      <proof prover="3"><result status="timeout" time="1.000000" steps="1506641"/></proof>
+      <transf name="split_vc" proved="true" >
+       <goal name="cmatmul&#39;vc.65.0.0.0.0.0" expl="assertion" proved="true">
+       <proof prover="2" timelimit="5" memlimit="2000"><result status="valid" time="4.197109" steps="171062"/></proof>
+       </goal>
+      </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
     </goal>
-    <goal name="matmul&#39;vc.66.0.1" expl="assertion" proved="true">
-    <proof prover="3"><result status="valid" time="0.011961" steps="10624"/></proof>
+    <goal name="cmatmul&#39;vc.65.0.1" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.012075" steps="10424"/></proof>
     </goal>
    </transf>
    </goal>
-   <goal name="matmul&#39;vc.66.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.008191" steps="10595"/></proof>
+   <goal name="cmatmul&#39;vc.65.1" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.65.1.0" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.007780" steps="10395"/></proof>
+    </goal>
+    <goal name="matmul&#39;vc.65.0.0" expl="assertion">
+    <transf name="inline_goal" >
+     <goal name="matmul&#39;vc.65.0.0.0" expl="assertion">
+     <transf name="split_all_full" >
+      <goal name="matmul&#39;vc.65.0.0.0.0" expl="assertion">
+      <transf name="split_vc" >
+       <goal name="matmul&#39;vc.65.0.0.0.0.0" expl="assertion">
+       <proof prover="0"><undone/></proof>
+       <proof prover="1"><undone/></proof>
+       <proof prover="2"><undone/></proof>
+       <proof prover="3"><undone/></proof>
+       </goal>
+      </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
    </goal>
   </transf>
   </goal>
-  <goal name="matmul&#39;vc.67" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.044300" steps="222981"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.68" expl="precondition" proved="true">
+  <goal name="cmatmul&#39;vc.66" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.68.0" expl="precondition" proved="true">
+   <goal name="cmatmul&#39;vc.66.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="90564"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="20066"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.016382" steps="3414145"/></proof>
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.68.0.0" expl="precondition" proved="true">
+    <goal name="cmatmul&#39;vc.66.0.0" expl="assertion" proved="true">
+    <proof prover="1" timelimit="30" memlimit="4000"><result status="valid" time="7.009716" steps="214747"/></proof>
+    </goal>
+    <goal name="cmatmul&#39;vc.66.0.1" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.011880" steps="10425"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="cmatmul&#39;vc.66.1" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.66.1.0" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.011961" steps="10396"/></proof>
+    </goal>
+    <goal name="matmul&#39;vc.66.0.0" expl="assertion">
+    <proof prover="0"><undone/></proof>
+    <proof prover="1"><undone/></proof>
+    <proof prover="2"><undone/></proof>
+    <proof prover="3"><undone/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="cmatmul&#39;vc.67" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.044300" steps="218807"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.68" expl="precondition" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="cmatmul&#39;vc.68.0" expl="precondition" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.68.0.0" expl="precondition" proved="true">
+    <proof prover="0"><result status="timeout" time="1.000000" steps="122088"/></proof>
+    <proof prover="1"><result status="timeout" time="1.000000" steps="20018"/></proof>
+    <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+    <proof prover="3"><result status="timeout" time="1.015250" steps="3423289"/></proof>
     <transf name="split_vc" proved="true" >
-     <goal name="matmul&#39;vc.68.0.0.0" expl="precondition" proved="true">
-     <proof prover="1" timelimit="5" memlimit="2000"><result status="valid" time="1.625682" steps="75230"/></proof>
+     <goal name="cmatmul&#39;vc.68.0.0.0" expl="precondition" proved="true">
+     <proof prover="1" timelimit="5" memlimit="2000"><result status="valid" time="2.615923" steps="77340"/></proof>
      </goal>
-     <goal name="matmul&#39;vc.68.0.0.1" expl="precondition" proved="true">
-     <proof prover="3"><result status="valid" time="0.016225" steps="10626"/></proof>
+     <goal name="cmatmul&#39;vc.68.0.0.1" expl="precondition" proved="true">
+     <proof prover="3"><result status="valid" time="0.007257" steps="10427"/></proof>
      </goal>
     </transf>
     </goal>
-    <goal name="matmul&#39;vc.68.0.1" expl="precondition" proved="true">
-    <proof prover="3"><result status="valid" time="0.007625" steps="10597"/></proof>
+    <goal name="cmatmul&#39;vc.68.0.1" expl="precondition" proved="true">
+    <transf name="split_vc" proved="true" >
+     <goal name="cmatmul&#39;vc.68.0.1.0" expl="precondition" proved="true">
+     <proof prover="3"><result status="valid" time="0.016225" steps="10398"/></proof>
+     </goal>
+     <goal name="matmul&#39;vc.68.0.0.0" expl="precondition">
+     <proof prover="0"><undone/></proof>
+     <proof prover="1"><undone/></proof>
+     <proof prover="2"><undone/></proof>
+     <proof prover="3"><undone/></proof>
+     </goal>
+    </transf>
     </goal>
    </transf>
    </goal>
-   <goal name="matmul&#39;vc.68.1" expl="precondition" proved="true">
-   <proof prover="2"><result status="valid" time="0.448401" steps="42908"/></proof>
+   <goal name="cmatmul&#39;vc.68.1" expl="precondition" proved="true">
+   <proof prover="2"><result status="valid" time="0.448401" steps="40848"/></proof>
    </goal>
   </transf>
   </goal>
-  <goal name="matmul&#39;vc.69" expl="assertion" proved="true">
+  <goal name="cmatmul&#39;vc.69" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.69.0" expl="assertion" proved="true">
+   <goal name="cmatmul&#39;vc.69.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="96173"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="19839"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.023478" steps="3279192"/></proof>
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.69.0.0" expl="assertion" proved="true">
-    <proof prover="0" timelimit="30" memlimit="4000"><result status="valid" time="4.889052" steps="340923"/></proof>
+    <goal name="cmatmul&#39;vc.69.0.0" expl="assertion" proved="true">
+    <proof prover="1" timelimit="5" memlimit="2000"><result status="valid" time="4.108830" steps="125305"/></proof>
     </goal>
-    <goal name="matmul&#39;vc.69.0.1" expl="assertion" proved="true">
-    <proof prover="3"><result status="valid" time="0.013281" steps="10953"/></proof>
+    <goal name="cmatmul&#39;vc.69.0.1" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.008109" steps="10754"/></proof>
     </goal>
    </transf>
    </goal>
-   <goal name="matmul&#39;vc.69.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.011739" steps="10924"/></proof>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="matmul&#39;vc.70" expl="assertion" proved="true">
-  <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.70.0" expl="assertion" proved="true">
+   <goal name="cmatmul&#39;vc.69.1" expl="assertion" proved="true">
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.70.0.0" expl="assertion" proved="true">
-    <proof prover="0"><result status="valid" time="3.036479" steps="181449"/></proof>
+    <goal name="cmatmul&#39;vc.69.1.0" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.013281" steps="10725"/></proof>
     </goal>
-    <goal name="matmul&#39;vc.70.0.1" expl="assertion" proved="true">
-    <proof prover="3"><result status="valid" time="0.004170" steps="10956"/></proof>
+    <goal name="matmul&#39;vc.69.0.0" expl="assertion">
+    <proof prover="0"><undone/></proof>
+    <proof prover="1"><undone/></proof>
+    <proof prover="2"><undone/></proof>
+    <proof prover="3"><undone/></proof>
     </goal>
    </transf>
    </goal>
-   <goal name="matmul&#39;vc.70.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.008397" steps="10927"/></proof>
-   </goal>
   </transf>
   </goal>
-  <goal name="matmul&#39;vc.71" expl="loop invariant preservation" proved="true">
-  <proof prover="3"><result status="valid" time="0.020951" steps="46168"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.72" expl="loop invariant preservation" proved="true">
+  <goal name="cmatmul&#39;vc.70" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.72.0" expl="loop invariant preservation" proved="true">
+   <goal name="cmatmul&#39;vc.70.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="92053"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="30613"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.016794" steps="3348619"/></proof>
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.72.0.0" expl="loop invariant preservation" proved="true">
-    <proof prover="2" timelimit="5" memlimit="2000"><result status="valid" time="4.448321" steps="164606"/></proof>
+    <goal name="cmatmul&#39;vc.70.0.0" expl="assertion" proved="true">
+    <proof prover="0" timelimit="5" memlimit="2000"><result status="valid" time="1.616599" steps="146283"/></proof>
     </goal>
-    <goal name="matmul&#39;vc.72.0.1" expl="loop invariant preservation" proved="true">
-    <proof prover="3"><result status="valid" time="0.008457" steps="10962"/></proof>
+    <goal name="cmatmul&#39;vc.70.0.1" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.017793" steps="10757"/></proof>
     </goal>
    </transf>
    </goal>
-   <goal name="matmul&#39;vc.72.1" expl="loop invariant preservation" proved="true">
-   <proof prover="3"><result status="valid" time="0.011184" steps="10933"/></proof>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="matmul&#39;vc.73" expl="loop invariant preservation" proved="true">
-  <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.73.0" expl="loop invariant preservation" proved="true">
+   <goal name="cmatmul&#39;vc.70.1" expl="assertion" proved="true">
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.73.0.0" expl="loop invariant preservation" proved="true">
-    <proof prover="0"><result status="valid" time="2.614941" steps="174608"/></proof>
+    <goal name="cmatmul&#39;vc.70.1.0" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.004170" steps="10728"/></proof>
     </goal>
-    <goal name="matmul&#39;vc.73.0.1" expl="loop invariant preservation" proved="true">
-    <proof prover="3"><result status="valid" time="0.011097" steps="10961"/></proof>
+    <goal name="matmul&#39;vc.70.0.0" expl="assertion">
+    <proof prover="0"><undone/></proof>
+    <proof prover="1"><undone/></proof>
+    <proof prover="2"><undone/></proof>
+    <proof prover="3"><undone/></proof>
     </goal>
    </transf>
    </goal>
-   <goal name="matmul&#39;vc.73.1" expl="loop invariant preservation" proved="true">
-   <proof prover="3"><result status="valid" time="0.007929" steps="10932"/></proof>
+  </transf>
+  </goal>
+  <goal name="cmatmul&#39;vc.71" expl="loop invariant preservation" proved="true">
+  <proof prover="3"><result status="valid" time="0.020951" steps="45334"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.72" expl="loop invariant preservation" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="cmatmul&#39;vc.72.0" expl="loop invariant preservation" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="93555"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="40275"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.022368" steps="3540844"/></proof>
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.72.0.0" expl="loop invariant preservation" proved="true">
+    <proof prover="0" timelimit="30" memlimit="4000"><result status="valid" time="10.077802" steps="534821"/></proof>
+    </goal>
+    <goal name="cmatmul&#39;vc.72.0.1" expl="loop invariant preservation" proved="true">
+    <proof prover="3"><result status="valid" time="0.017437" steps="10763"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="cmatmul&#39;vc.72.1" expl="loop invariant preservation" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.72.1.0" expl="loop invariant preservation" proved="true">
+    <proof prover="3"><result status="valid" time="0.008457" steps="10734"/></proof>
+    </goal>
+    <goal name="matmul&#39;vc.72.0.0" expl="loop invariant preservation">
+    <proof prover="0"><undone/></proof>
+    <proof prover="1"><undone/></proof>
+    <proof prover="2"><undone/></proof>
+    <proof prover="3"><undone/></proof>
+    </goal>
+   </transf>
    </goal>
   </transf>
   </goal>
-  <goal name="matmul&#39;vc.74" expl="out of loop bounds" proved="true">
-  <proof prover="3"><result status="valid" time="0.090034" steps="279420"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.75" expl="loop invariant preservation" proved="true">
-  <proof prover="3"><result status="valid" time="0.019700" steps="11531"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.76" expl="loop invariant preservation" proved="true">
-  <proof prover="2"><result status="valid" time="0.392599" steps="38572"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.77" expl="out of loop bounds" proved="true">
-  <proof prover="3"><result status="valid" time="0.059324" steps="225676"/></proof>
-  </goal>
-  <goal name="matmul&#39;vc.78" expl="assertion" proved="true">
+  <goal name="cmatmul&#39;vc.73" expl="loop invariant preservation" proved="true">
   <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.78.0" expl="assertion" proved="true">
+   <goal name="cmatmul&#39;vc.73.0" expl="loop invariant preservation" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="95201"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="35000"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.015858" steps="3462274"/></proof>
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.78.0.0" expl="assertion" proved="true">
+    <goal name="cmatmul&#39;vc.73.0.0" expl="loop invariant preservation" proved="true">
+    <proof prover="2" timelimit="5" memlimit="2000"><result status="valid" time="2.331797" steps="123947"/></proof>
+    </goal>
+    <goal name="cmatmul&#39;vc.73.0.1" expl="loop invariant preservation" proved="true">
+    <proof prover="3"><result status="valid" time="0.012352" steps="10762"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="cmatmul&#39;vc.73.1" expl="loop invariant preservation" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.73.1.0" expl="loop invariant preservation" proved="true">
+    <proof prover="3"><result status="valid" time="0.011097" steps="10733"/></proof>
+    </goal>
+    <goal name="matmul&#39;vc.73.0.0" expl="loop invariant preservation">
+    <proof prover="0"><undone/></proof>
+    <proof prover="1"><undone/></proof>
+    <proof prover="2"><undone/></proof>
+    <proof prover="3"><undone/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="cmatmul&#39;vc.74" expl="out of loop bounds" proved="true">
+  <proof prover="3"><result status="valid" time="0.090034" steps="270109"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.75" expl="loop invariant preservation" proved="true">
+  <proof prover="3"><result status="valid" time="0.019700" steps="11332"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.76" expl="loop invariant preservation" proved="true">
+  <proof prover="2"><result status="valid" time="0.208852" steps="25577"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.77" expl="out of loop bounds" proved="true">
+  <proof prover="3"><result status="valid" time="0.059324" steps="219737"/></proof>
+  </goal>
+  <goal name="cmatmul&#39;vc.78" expl="assertion" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="cmatmul&#39;vc.78.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="109084"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="26039"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.015856" steps="3208369"/></proof>
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.78.0.0" expl="assertion" proved="true">
+    <proof prover="0" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="363766"/></proof>
+    <proof prover="1" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="183957"/></proof>
+    <proof prover="2" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000"/></proof>
+    <proof prover="3" timelimit="5" memlimit="2000"><result status="timeout" time="4.336090" steps="7542206"/></proof>
     <transf name="inline_goal" proved="true" >
-     <goal name="matmul&#39;vc.78.0.0.0" expl="assertion" proved="true">
+     <goal name="cmatmul&#39;vc.78.0.0.0" expl="assertion" proved="true">
      <transf name="split_all_full" proved="true" >
-      <goal name="matmul&#39;vc.78.0.0.0.0" expl="assertion" proved="true">
-      <proof prover="2"><result status="valid" time="0.649920" steps="48412"/></proof>
+      <goal name="cmatmul&#39;vc.78.0.0.0.0" expl="assertion" proved="true">
+      <proof prover="2"><result status="valid" time="0.530927" steps="47848"/></proof>
       </goal>
      </transf>
      </goal>
     </transf>
     </goal>
-    <goal name="matmul&#39;vc.78.0.1" expl="assertion" proved="true">
-    <proof prover="3"><result status="valid" time="0.012824" steps="10423"/></proof>
+    <goal name="cmatmul&#39;vc.78.0.1" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.008553" steps="10224"/></proof>
     </goal>
    </transf>
    </goal>
-   <goal name="matmul&#39;vc.78.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.007928" steps="10394"/></proof>
+   <goal name="cmatmul&#39;vc.78.1" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.78.1.0" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.012824" steps="10195"/></proof>
+    </goal>
+    <goal name="matmul&#39;vc.78.0.0" expl="assertion">
+    <transf name="inline_goal" >
+     <goal name="matmul&#39;vc.78.0.0.0" expl="assertion">
+     <transf name="split_all_full" >
+      <goal name="matmul&#39;vc.78.0.0.0.0" expl="assertion">
+      <proof prover="0"><undone/></proof>
+      <proof prover="1"><undone/></proof>
+      <proof prover="2"><undone/></proof>
+      <proof prover="3"><undone/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
    </goal>
   </transf>
   </goal>
-  <goal name="matmul&#39;vc.79" expl="assertion" proved="true">
+  <goal name="cmatmul&#39;vc.79" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.79.0" expl="assertion" proved="true">
+   <goal name="cmatmul&#39;vc.79.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="120163"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="44303"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.033150" steps="3203453"/></proof>
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.79.0.0" expl="assertion" proved="true">
+    <goal name="cmatmul&#39;vc.79.0.0" expl="assertion" proved="true">
+    <proof prover="0" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="361630"/></proof>
+    <proof prover="1" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="190913"/></proof>
+    <proof prover="2" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000"/></proof>
+    <proof prover="3" timelimit="5" memlimit="2000"><result status="timeout" time="4.310167" steps="6691527"/></proof>
     <transf name="inline_goal" proved="true" >
-     <goal name="matmul&#39;vc.79.0.0.0" expl="assertion" proved="true">
+     <goal name="cmatmul&#39;vc.79.0.0.0" expl="assertion" proved="true">
      <transf name="split_all_full" proved="true" >
-      <goal name="matmul&#39;vc.79.0.0.0.0" expl="assertion" proved="true">
-      <transf name="split_vc" proved="true" >
-       <goal name="matmul&#39;vc.79.0.0.0.0.0" expl="assertion" proved="true">
-       <proof prover="0"><result status="valid" time="1.149974" steps="101107"/></proof>
+      <goal name="cmatmul&#39;vc.79.0.0.0.0" expl="assertion" proved="true">
+      <proof prover="0"><result status="valid" time="0.875718" steps="91519"/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+    <goal name="cmatmul&#39;vc.79.0.1" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.019379" steps="10225"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="cmatmul&#39;vc.79.1" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.79.1.0" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.012335" steps="10196"/></proof>
+    </goal>
+    <goal name="matmul&#39;vc.79.0.0" expl="assertion">
+    <transf name="inline_goal" >
+     <goal name="matmul&#39;vc.79.0.0.0" expl="assertion">
+     <transf name="split_all_full" >
+      <goal name="matmul&#39;vc.79.0.0.0.0" expl="assertion">
+      <transf name="split_vc" >
+       <goal name="matmul&#39;vc.79.0.0.0.0.0" expl="assertion">
+       <proof prover="0"><undone/></proof>
+       <proof prover="1"><undone/></proof>
+       <proof prover="2"><undone/></proof>
+       <proof prover="3"><undone/></proof>
        </goal>
       </transf>
       </goal>
@@ -476,57 +720,77 @@
      </goal>
     </transf>
     </goal>
-    <goal name="matmul&#39;vc.79.0.1" expl="assertion" proved="true">
-    <proof prover="3"><result status="valid" time="0.012335" steps="10424"/></proof>
-    </goal>
    </transf>
-   </goal>
-   <goal name="matmul&#39;vc.79.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.016575" steps="10395"/></proof>
    </goal>
   </transf>
   </goal>
-  <goal name="matmul&#39;vc.80" expl="assertion" proved="true">
+  <goal name="cmatmul&#39;vc.80" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.80.0" expl="assertion" proved="true">
+   <goal name="cmatmul&#39;vc.80.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="126073"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="68954"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.015102" steps="3038362"/></proof>
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.80.0.0" expl="assertion" proved="true">
-    <proof prover="2" timelimit="5" memlimit="2000"><result status="valid" time="1.738550" steps="112390"/></proof>
+    <goal name="cmatmul&#39;vc.80.0.0" expl="assertion" proved="true">
+    <proof prover="2" timelimit="5" memlimit="2000"><result status="valid" time="1.377052" steps="103893"/></proof>
     </goal>
-    <goal name="matmul&#39;vc.80.0.1" expl="assertion" proved="true">
-    <proof prover="3"><result status="valid" time="0.008092" steps="10425"/></proof>
+    <goal name="cmatmul&#39;vc.80.0.1" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.011597" steps="10226"/></proof>
     </goal>
    </transf>
    </goal>
-   <goal name="matmul&#39;vc.80.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.007551" steps="10396"/></proof>
+   <goal name="cmatmul&#39;vc.80.1" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.80.1.0" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.008092" steps="10197"/></proof>
+    </goal>
+    <goal name="matmul&#39;vc.80.0.0" expl="assertion">
+    <proof prover="0"><undone/></proof>
+    <proof prover="1"><undone/></proof>
+    <proof prover="2"><undone/></proof>
+    <proof prover="3"><undone/></proof>
+    </goal>
+   </transf>
    </goal>
   </transf>
   </goal>
-  <goal name="matmul&#39;vc.81" expl="assertion" proved="true">
-  <proof prover="3"><result status="valid" time="0.048595" steps="205169"/></proof>
+  <goal name="cmatmul&#39;vc.81" expl="assertion" proved="true">
+  <proof prover="3"><result status="valid" time="0.048595" steps="257039"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.82" expl="assertion" proved="true">
-  <proof prover="3"><result status="valid" time="0.051751" steps="205686"/></proof>
+  <goal name="cmatmul&#39;vc.82" expl="assertion" proved="true">
+  <proof prover="3"><result status="valid" time="1.202939" steps="2083911"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.83" expl="assertion" proved="true">
-  <proof prover="3"><result status="valid" time="0.093185" steps="258128"/></proof>
+  <goal name="cmatmul&#39;vc.83" expl="assertion" proved="true">
+  <proof prover="3"><result status="valid" time="0.093185" steps="254518"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.84" expl="assertion" proved="true">
+  <goal name="cmatmul&#39;vc.84" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
-   <goal name="matmul&#39;vc.84.0" expl="assertion" proved="true">
+   <goal name="cmatmul&#39;vc.84.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="timeout" time="1.000000" steps="116865"/></proof>
+   <proof prover="1"><result status="timeout" time="1.000000" steps="64188"/></proof>
+   <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+   <proof prover="3"><result status="timeout" time="1.024796" steps="3460364"/></proof>
    <transf name="split_vc" proved="true" >
-    <goal name="matmul&#39;vc.84.0.0" expl="assertion" proved="true">
+    <goal name="cmatmul&#39;vc.84.0.0" expl="assertion" proved="true">
+    <proof prover="0" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="366462"/></proof>
+    <proof prover="1" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000" steps="250951"/></proof>
+    <proof prover="2" timelimit="5" memlimit="2000"><result status="timeout" time="5.000000"/></proof>
+    <proof prover="3" timelimit="5" memlimit="2000"><result status="timeout" time="4.297581" steps="7307784"/></proof>
     <transf name="inline_goal" proved="true" >
-     <goal name="matmul&#39;vc.84.0.0.0" expl="assertion" proved="true">
+     <goal name="cmatmul&#39;vc.84.0.0.0" expl="assertion" proved="true">
      <transf name="split_all_full" proved="true" >
-      <goal name="matmul&#39;vc.84.0.0.0.0" expl="VC for matmul" proved="true">
-      <proof prover="2"><result status="valid" time="0.368535" steps="31697"/></proof>
+      <goal name="cmatmul&#39;vc.84.0.0.0.0" expl="VC for cmatmul" proved="true">
+      <proof prover="2"><result status="valid" time="0.319872" steps="31569"/></proof>
       </goal>
-      <goal name="matmul&#39;vc.84.0.0.0.1" expl="VC for matmul" proved="true">
+      <goal name="cmatmul&#39;vc.84.0.0.0.1" expl="VC for cmatmul" proved="true">
+      <proof prover="0"><result status="timeout" time="1.000000" steps="93973"/></proof>
+      <proof prover="1"><result status="timeout" time="1.000000" steps="42853"/></proof>
+      <proof prover="2"><result status="timeout" time="1.000000"/></proof>
+      <proof prover="3"><result status="timeout" time="1.000000" steps="1623794"/></proof>
       <transf name="split_vc" proved="true" >
-       <goal name="matmul&#39;vc.84.0.0.0.1.0" expl="VC for matmul" proved="true">
-       <proof prover="0"><result status="valid" time="2.128745" steps="212092"/></proof>
+       <goal name="cmatmul&#39;vc.84.0.0.0.1.0" expl="VC for cmatmul" proved="true">
+       <proof prover="2" timelimit="5" memlimit="2000"><result status="valid" time="4.573960" steps="303836"/></proof>
        </goal>
       </transf>
       </goal>
@@ -534,24 +798,52 @@
      </goal>
     </transf>
     </goal>
-    <goal name="matmul&#39;vc.84.0.1" expl="assertion" proved="true">
-    <proof prover="3"><result status="valid" time="0.013943" steps="10446"/></proof>
+    <goal name="cmatmul&#39;vc.84.0.1" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.007923" steps="10247"/></proof>
     </goal>
    </transf>
    </goal>
-   <goal name="matmul&#39;vc.84.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.012398" steps="10417"/></proof>
+   <goal name="cmatmul&#39;vc.84.1" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="cmatmul&#39;vc.84.1.0" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.013943" steps="10218"/></proof>
+    </goal>
+    <goal name="matmul&#39;vc.84.0.0" expl="assertion">
+    <transf name="inline_goal" >
+     <goal name="matmul&#39;vc.84.0.0.0" expl="assertion">
+     <transf name="split_all_full" >
+      <goal name="matmul&#39;vc.84.0.0.0.0" expl="VC for matmul">
+      <proof prover="0"><undone/></proof>
+      <proof prover="1"><undone/></proof>
+      <proof prover="2"><undone/></proof>
+      <proof prover="3"><undone/></proof>
+      </goal>
+      <goal name="matmul&#39;vc.84.0.0.0.1" expl="VC for matmul">
+      <transf name="split_vc" >
+       <goal name="matmul&#39;vc.84.0.0.0.1.0" expl="VC for matmul">
+       <proof prover="0"><undone/></proof>
+       <proof prover="1"><undone/></proof>
+       <proof prover="2"><undone/></proof>
+       <proof prover="3"><undone/></proof>
+       </goal>
+      </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
    </goal>
   </transf>
   </goal>
-  <goal name="matmul&#39;vc.85" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.523762" steps="1011701"/></proof>
+  <goal name="cmatmul&#39;vc.85" expl="postcondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.108511" steps="18177"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.86" expl="out of loop bounds" proved="true">
-  <proof prover="3"><result status="valid" time="0.091877" steps="208492"/></proof>
+  <goal name="cmatmul&#39;vc.86" expl="out of loop bounds" proved="true">
+  <proof prover="3"><result status="valid" time="0.091877" steps="200638"/></proof>
   </goal>
-  <goal name="matmul&#39;vc.87" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.011895" steps="5224"/></proof>
+  <goal name="cmatmul&#39;vc.87" expl="postcondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.011895" steps="4724"/></proof>
   </goal>
  </transf>
  </goal>
