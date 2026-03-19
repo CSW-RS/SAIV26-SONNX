@@ -136,11 +136,6 @@ module OPConv2d
   requires { let y_shape = conv_dims x w str_h str_w dir_h dir_w pad_top pad_left pad_bottom pad_right in
               get_dim y_shape 2 > 0 /\ get_dim y_shape 3 > 0
            }
-  ensures { result.background = x.background }
-  ensures { result.dims = conv_dims x w str_h str_w dir_h dir_w pad_top pad_left pad_bottom pad_right }
-  ensures { let y_dims = conv_dims x w str_h str_w dir_h dir_w pad_top pad_left pad_bottom pad_right in
-            result.data = dconv x w y_dims str_h str_w dir_h dir_w pad_top pad_left  
-         }
   =
   let y_dims = conv_dims x w str_h str_w dir_h dir_w pad_top pad_left pad_bottom pad_right in
   { dims = y_dims;

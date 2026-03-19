@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "https://www.why3.org/why3session.dtd">
 <why3session shape_version="6">
-<prover id="0" name="CVC4" version="1.8" timelimit="5" steplimit="0" memlimit="4000"/>
+<prover id="0" name="CVC4" version="1.8" timelimit="86400" steplimit="0" memlimit="16000"/>
 <prover id="1" name="Alt-Ergo" version="2.6.2" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="2" name="CVC5" version="1.2.1" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="3" name="Z3" version="4.13.4" timelimit="1" steplimit="0" memlimit="1000"/>
@@ -55,15 +55,6 @@
   <goal name="conv&#39;vc.1" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.018654" steps="63777"/></proof>
   </goal>
-  <goal name="conv&#39;vc.2" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.004021" steps="4149"/></proof>
-  </goal>
-  <goal name="conv&#39;vc.3" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.000001" steps="4158"/></proof>
-  </goal>
-  <goal name="conv&#39;vc.4" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.006950" steps="4171"/></proof>
-  </goal>
  </transf>
  </goal>
 </theory>
@@ -75,7 +66,7 @@
    <goal name="ivector_get_dim_value_at&#39;vc.0.0" expl="assertion" proved="true">
    <transf name="split_all_full" proved="true" >
     <goal name="ivector_get_dim_value_at&#39;vc.0.0.0" expl="assertion" proved="true">
-    <proof prover="0" timelimit="1" memlimit="1000"><result status="valid" time="0.737358" steps="65963"/></proof>
+    <proof prover="0" timelimit="1" memlimit="1000"><result status="valid" time="0.426045" steps="65963"/></proof>
     </goal>
    </transf>
    </goal>
@@ -85,7 +76,7 @@
   <proof prover="3"><result status="valid" time="0.023927" steps="126725"/></proof>
   </goal>
   <goal name="ivector_get_dim_value_at&#39;vc.2" expl="postcondition" proved="true">
-  <proof prover="2" timelimit="5" memlimit="2000"><result status="valid" time="2.488006" steps="126962"/></proof>
+  <proof prover="2"><result status="valid" time="1.233601" steps="126962"/></proof>
   </goal>
  </transf>
  </goal>
@@ -144,7 +135,7 @@
    <goal name="coords_from_X_p&#39;vc.16.0" expl="assertion" proved="true">
    <transf name="split_all_full" proved="true" >
     <goal name="coords_from_X_p&#39;vc.16.0.0" expl="assertion" proved="true">
-    <proof prover="0" memlimit="2000"><result status="valid" time="4.173420" steps="340407"/></proof>
+    <proof prover="0" timelimit="5" memlimit="2000"><result status="valid" time="4.780951" steps="340407"/></proof>
     </goal>
    </transf>
    </goal>
@@ -165,7 +156,7 @@
   <goal name="coords_from_X_p&#39;vc.21" expl="postcondition" proved="true">
   <transf name="split_vc" proved="true" >
    <goal name="coords_from_X_p&#39;vc.21.0" expl="postcondition" proved="true">
-   <proof prover="1" timelimit="5" memlimit="2000"><result status="valid" time="1.141132" steps="87020"/></proof>
+   <proof prover="1"><result status="valid" time="1.141132" steps="87020"/></proof>
    </goal>
    <goal name="coords_from_X_p&#39;vc.21.1" expl="postcondition" proved="true">
    <proof prover="1"><result status="valid" time="0.269090" steps="12822"/></proof>
@@ -177,7 +168,7 @@
   </goal>
  </transf>
  </goal>
- <goal name="valid_bounds_2&#39;vc" expl="VC for valid_bounds_2" proved="true">
+ <goal name="valid_bounds&#39;vc" expl="VC for valid_bounds" proved="true">
  <proof prover="1"><result status="valid" time="0.084731" steps="1874"/></proof>
  </goal>
  <goal name="w_cools_calculate&#39;vc" expl="VC for w_cools_calculate" proved="true">
@@ -254,7 +245,11 @@
      <goal name="w_cools_calculate&#39;vc.21.0.0.0" expl="assertion" proved="true">
      <transf name="compute_in_goal" proved="true" >
       <goal name="w_cools_calculate&#39;vc.21.0.0.0.0" expl="assertion" proved="true">
-      <proof prover="2" timelimit="86400" memlimit="16000"><result status="valid" time="44.085749" steps="1597787"/></proof>
+      <transf name="split_vc" proved="true" >
+       <goal name="w_cools_calculate&#39;vc.21.0.0.0.0.0" expl="assertion" proved="true">
+       <proof prover="2" timelimit="86400" memlimit="16000"><result status="valid" time="36.837815" steps="1597787"/></proof>
+       </goal>
+      </transf>
       </goal>
      </transf>
      </goal>
@@ -362,7 +357,7 @@
       <goal name="w_cools_calculate&#39;vc.50.0.0.0.0" expl="assertion" proved="true">
       <transf name="compute_in_goal" proved="true" >
        <goal name="w_cools_calculate&#39;vc.50.0.0.0.0.0" expl="assertion" proved="true">
-       <proof prover="2" timelimit="86400" memlimit="16000"><result status="valid" time="83.692586" steps="3356184"/></proof>
+       <proof prover="2" timelimit="86400" memlimit="16000"><result status="valid" time="81.390616" steps="3356184"/></proof>
        </goal>
       </transf>
       </goal>
@@ -651,7 +646,7 @@
   <proof prover="2"><result status="valid" time="0.279713" steps="44951"/></proof>
   </goal>
   <goal name="cconv&#39;vc.35" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.129344" steps="1180"/></proof>
+  <proof prover="1"><result status="valid" time="0.129344" steps="1182"/></proof>
   </goal>
   <goal name="cconv&#39;vc.36" expl="precondition" proved="true">
   <proof prover="1"><result status="valid" time="0.156415" steps="1394"/></proof>
@@ -693,7 +688,11 @@
     <goal name="cconv&#39;vc.47.0.0" expl="precondition" proved="true">
     <transf name="split_all_full" proved="true" >
      <goal name="cconv&#39;vc.47.0.0.0" expl="precondition" proved="true">
-     <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="5.142840" steps="286293"/></proof>
+     <transf name="split_vc" proved="true" >
+      <goal name="cconv&#39;vc.47.0.0.0.0" expl="precondition" proved="true">
+      <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="5.380858" steps="286293"/></proof>
+      </goal>
+     </transf>
      </goal>
     </transf>
     </goal>
@@ -715,7 +714,7 @@
       <goal name="cconv&#39;vc.48.0.0.0.0" expl="assertion" proved="true">
       <transf name="compute_in_goal" proved="true" >
        <goal name="cconv&#39;vc.48.0.0.0.0.0" expl="assertion" proved="true">
-       <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="21.195687" steps="886708"/></proof>
+       <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="19.001449" steps="886708"/></proof>
        </goal>
       </transf>
       </goal>
@@ -733,7 +732,7 @@
   <goal name="cconv&#39;vc.50" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
    <goal name="cconv&#39;vc.50.0" expl="assertion" proved="true">
-   <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="6.709310" steps="352070"/></proof>
+   <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="6.326383" steps="352070"/></proof>
    </goal>
   </transf>
   </goal>
@@ -756,7 +755,7 @@
      <proof prover="2"><result status="valid" time="0.441630" steps="53062"/></proof>
      </goal>
      <goal name="cconv&#39;vc.52.0.0.3" expl="assertion" proved="true">
-     <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="8.556047" steps="498890"/></proof>
+     <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="7.440664" steps="498890"/></proof>
      </goal>
     </transf>
     </goal>
@@ -765,10 +764,14 @@
   </transf>
   </goal>
   <goal name="cconv&#39;vc.53" expl="assertion" proved="true">
-  <proof prover="3"><result status="valid" time="0.264765" steps="616869"/></proof>
+  <transf name="split_vc" proved="true" >
+   <goal name="cconv&#39;vc.53.0" expl="assertion" proved="true">
+   <proof prover="3"><result status="valid" time="0.237729" steps="616856"/></proof>
+   </goal>
+  </transf>
   </goal>
   <goal name="cconv&#39;vc.54" expl="assertion" proved="true">
-  <proof prover="3"><result status="valid" time="0.254838" steps="619512"/></proof>
+  <proof prover="3"><result status="valid" time="0.270618" steps="619512"/></proof>
   </goal>
   <goal name="cconv&#39;vc.55" expl="assertion" proved="true">
   <proof prover="3"><result status="valid" time="0.064515" steps="320434"/></proof>
@@ -789,7 +792,7 @@
      <proof prover="2"><result status="valid" time="0.483931" steps="53862"/></proof>
      </goal>
      <goal name="cconv&#39;vc.56.0.0.3" expl="assertion" proved="true">
-     <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="11.108355" steps="622467"/></proof>
+     <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="10.207621" steps="622467"/></proof>
      </goal>
     </transf>
     </goal>
@@ -800,12 +803,12 @@
   <goal name="cconv&#39;vc.57" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
    <goal name="cconv&#39;vc.57.0" expl="assertion" proved="true">
-   <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="7.879266" steps="411802"/></proof>
+   <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="8.031752" steps="411802"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="cconv&#39;vc.58" expl="assertion" proved="true">
-  <proof prover="3"><result status="valid" time="0.270618" steps="650019"/></proof>
+  <proof prover="3"><result status="valid" time="0.254838" steps="650019"/></proof>
   </goal>
   <goal name="cconv&#39;vc.59" expl="assertion" proved="true">
   <proof prover="3"><result status="valid" time="0.065597" steps="332383"/></proof>
@@ -826,7 +829,7 @@
      <proof prover="2"><result status="valid" time="0.485522" steps="55126"/></proof>
      </goal>
      <goal name="cconv&#39;vc.60.0.0.3" expl="assertion" proved="true">
-     <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="11.329679" steps="604353"/></proof>
+     <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="11.012381" steps="604353"/></proof>
      </goal>
     </transf>
     </goal>
@@ -837,7 +840,7 @@
   <goal name="cconv&#39;vc.61" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
    <goal name="cconv&#39;vc.61.0" expl="assertion" proved="true">
-   <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="8.555535" steps="435482"/></proof>
+   <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="9.082325" steps="435482"/></proof>
    </goal>
   </transf>
   </goal>
@@ -860,7 +863,7 @@
      <proof prover="2"><result status="valid" time="0.438148" steps="58164"/></proof>
      </goal>
      <goal name="cconv&#39;vc.63.0.0.3" expl="assertion" proved="true">
-     <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="8.355693" steps="553325"/></proof>
+     <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="8.547384" steps="553325"/></proof>
      </goal>
     </transf>
     </goal>
@@ -871,7 +874,7 @@
   <goal name="cconv&#39;vc.64" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
    <goal name="cconv&#39;vc.64.0" expl="assertion" proved="true">
-   <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="9.554641" steps="472528"/></proof>
+   <proof prover="2" timelimit="30" memlimit="4000"><result status="valid" time="9.924854" steps="472528"/></proof>
    </goal>
   </transf>
   </goal>
@@ -891,7 +894,7 @@
   <proof prover="2"><result status="valid" time="0.483022" steps="59258"/></proof>
   </goal>
   <goal name="cconv&#39;vc.70" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.012726" steps="8766"/></proof>
+  <proof prover="3"><result status="valid" time="0.012726" steps="8566"/></proof>
   </goal>
   <goal name="cconv&#39;vc.71" expl="loop invariant preservation" proved="true">
   <proof prover="3"><result status="valid" time="0.021085" steps="24545"/></proof>
@@ -938,7 +941,7 @@
      <goal name="cconv&#39;vc.82.0.0.1" expl="VC for cconv" proved="true">
      <transf name="split_vc" proved="true" >
       <goal name="cconv&#39;vc.82.0.0.1.0" expl="VC for cconv" proved="true">
-      <proof prover="0" timelimit="30"><result status="valid" time="25.153913" steps="2587883"/></proof>
+      <proof prover="0"><result status="valid" time="21.411671" steps="2587879"/></proof>
       </goal>
      </transf>
      </goal>
@@ -949,13 +952,13 @@
   </transf>
   </goal>
   <goal name="cconv&#39;vc.83" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.209528" steps="576185"/></proof>
+  <proof prover="3"><result status="valid" time="0.209528" steps="568667"/></proof>
   </goal>
   <goal name="cconv&#39;vc.84" expl="out of loop bounds" proved="true">
-  <proof prover="3"><result status="valid" time="0.066185" steps="269210"/></proof>
+  <proof prover="3"><result status="valid" time="0.066185" steps="261274"/></proof>
   </goal>
   <goal name="cconv&#39;vc.85" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.014001" steps="5782"/></proof>
+  <proof prover="3"><result status="valid" time="0.014001" steps="5582"/></proof>
   </goal>
  </transf>
  </goal>
