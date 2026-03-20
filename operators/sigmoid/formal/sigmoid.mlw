@@ -5,7 +5,7 @@ module OPSigmoid
     use real.Real
     use real.ExpLog
 
-    let ghost function dsigmoid(x: tensor real): data real
+    function dsigmoid(x: tensor real): data real
     =
         fun ks ->
             if valid ks x.dims then

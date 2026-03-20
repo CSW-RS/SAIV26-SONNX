@@ -2,26 +2,18 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "https://www.why3.org/why3session.dtd">
 <why3session shape_version="6">
-<prover id="0" name="CVC4" version="1.8" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="1" name="Alt-Ergo" version="2.6.2" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="2" name="CVC5" version="1.2.1" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="3" name="Z3" version="4.13.4" timelimit="1" steplimit="0" memlimit="1000"/>
 <file format="whyml" proved="true">
 <path name=".."/><path name="sigmoid.mlw"/>
 <theory name="OPSigmoid" proved="true">
- <goal name="dsigmoid&#39;vc" expl="VC for dsigmoid" proved="true">
- <proof prover="3"><result status="valid" time="0.009299" steps="40445"/></proof>
- </goal>
  <goal name="sigmoid&#39;vc" expl="VC for sigmoid" proved="true">
  <proof prover="3"><result status="valid" time="0.023700" steps="42914"/></proof>
  </goal>
 </theory>
 <theory name="COPSigmoid" proved="true">
  <goal name="csigmoid&#39;vc" expl="VC for csigmoid" proved="true">
- <proof prover="0" obsolete="true"><result status="timeout" time="1.000000" steps="190519"/></proof>
- <proof prover="1" obsolete="true"><result status="timeout" time="1.000000" steps="19097"/></proof>
- <proof prover="2" obsolete="true"><result status="timeout" time="1.000000"/></proof>
- <proof prover="3" obsolete="true"><result status="timeout" time="0.783171" steps="2101674"/></proof>
  <transf name="split_vc" proved="true" >
   <goal name="csigmoid&#39;vc.0" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.110275" steps="360760"/></proof>
