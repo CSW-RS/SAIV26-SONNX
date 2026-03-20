@@ -64,7 +64,9 @@ Implementation details and design choices are made explicit at this level, and i
 
 ## Foundation Modules — Tensors
 
-Provides the core definitions for the formalization. Thses modules include:
+Provides the core definitions for the formalization.
+
+Thsese modules include:
 
 - `tensor.mlw` — Provides the abstract tensor model, including its properties and constructors.
 
