@@ -22,25 +22,18 @@ No specific restrictions apply to the **Flatten** operator.
 
 ## Informal specification
 
-Operator **Flatten** reshapes the input tensor $X$ into a 2D matrix $Y$. The first dimension of $Y$ is determined by the product of the dimensions of $X$ from the start up to (but not including) the specified $\text{axis}$. The second dimension of $Y$ is determined by the product of the dimensions of $X$ from the specified $\text{axis}$ to the end.
+Operator **Flatten** reshapes the input tensor $X$ into a 2D matrix $Y$. 
 
-$$\text{dY}_{0} = \prod_{i=0}^{\text{axis'}-1} \text{dX}_{i}$$
-$$\text{dY}_{1} = \prod_{i=\text{axis'}}^{rX-1} \text{dX}_{i}$$
+The first dimension of $Y$ is determined by the product of the dimensions of $X$ from the start up to (but not including) the specified $\text{axis}$. The second dimension of $Y$ is determined by the product of the dimensions of $X$ from the specified $\text{axis}$ to the end.
 
-Note that the product over an empty range/interval is defined to be 1. That means:
-- If $\text{axis'} = 0$, then $\text{dY}_{0} = 1$
-
-- If $\text{axis'} = rX$, then $\text{dY}_{1} = 1$
-
-Where 
-- $i$ is a dimension index
-
-- $\text{axis'}$  is the normalized $\text{axis}$ and is calculated as follows:
+Prior to the flatenning process there is a step that involves axis normalization, where:
    
-   $$\begin{cases}
-      \text{axis'} = \text{axis} & \text{if } \text{axis} \geq 0 \\
-      \text{axis'} = \text{axis} + rX & \text{if } \text{axis} < 0
-    \end{cases}$$
+$$
+\begin{cases}
+  \text{axis'} = \text{axis} & \text{if } \text{axis} \geq 0 \\
+  \text{axis'} = \text{axis} + rX & \text{if } \text{axis} < 0
+\end{cases}
+$$
 
 
 Flatten operation can be expressed as:
