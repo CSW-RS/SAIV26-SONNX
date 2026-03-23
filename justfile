@@ -63,3 +63,22 @@ clean operator="all":
         echo -e "--- Cleaning: {{cyan}}{{bold}}{{operator}}{{reset}}"
         cd operators/{{operator}}/formal && make clean
     fi
+
+# Verify a network model, or all models if none is specified
+verify model="all":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    load_paths=""
+    for op in {{operators}}; do
+        load_paths="$load_paths -L ../operators/$op/formal"
+    done
+    if [ "{{model}}" = "all" ]; then
+        for mlw in network/*.mlw; do
+            m=$(basename $mlw .mlw)
+            echo -e "--- Verifying: {{cyan}}{{bold}}$m{{reset}}"
+            (cd network && why3 prove $load_paths $(basename $mlw))
+        done
+    else
+        echo -e "--- Verifying: {{cyan}}{{bold}}{{model}}{{reset}}"
+        cd network && why3 prove $load_paths {{model}}.mlw
+    fi
