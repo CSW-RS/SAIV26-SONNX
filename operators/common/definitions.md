@@ -45,6 +45,17 @@ $$\mathit{size (\mathit{X\_shape})} = \prod_{i=0}^{rX-1} dX_i$$
 Where:
 - $\mathit{X\_shape}$ is the shape of the tensor $X$.
 
+#### Examples
+
+```math
+\mathit{size}([2, 3]) = 6
+```
+
+```math
+\mathit{size}([4, 5, 6]) = 120
+```
+
+
 #### Offset
 
 Takes both a list of coordinates (to access a tensor) and a tensor shape as input and produces the flattened equivalent coordinate of the tensor.
@@ -59,16 +70,45 @@ Where:
 
 >Note that the product over an empty range/interval is defined to be 1.
 
+#### Examples
+
+```math
+\mathit{offset}([0, 0], [2, 3]) = 0
+```
+```math
+\mathit{offset}([0, 1], [2, 3]) = 1
+```
+```math
+\mathit{offset}([1, 0], [2, 3]) = 3
+```
+```math
+\mathit{offset}([1, 2], [2, 3]) = 5
+```
 #### Index
 
 Takes both a flattened coordinate and a tensor shape as input and produces the equivalent list of coordinates to access the tensor.
 
-$$\mathit{index (\mathit{offset}, \mathit{X\_shape})} = [c_0, c_1, ..., c_{rX-1}]$$
+$$\mathit{index (\mathit{flat\_coord}, \mathit{X\_shape})} = [c_0, c_1, ..., c_{rX-1}]$$
 
 Where:
 
-- $\mathit{offset}$ is the flattened coordinate to access the tensor.
+- $\mathit{flat\_coord}$ is the flattened coordinate to access the tensor.
 
 - $\mathit{X\_shape}$ is the shape of the tensor $X$.
 
-- $c_i = \left ( \displaystyle\frac{\mathit{offset}}{\displaystyle\prod_{j=i+1}^{rX-1} dX_j} \right ) \mod dX_i$
+- $c_i = \left ( \displaystyle\frac{\mathit{flat\_coord}}{\displaystyle\prod_{j=i+1}^{rX-1} dX_j} \right ) \mod dX_i$
+
+#### Examples
+
+```math
+\mathit{index}(0, [2, 3]) = [0, 0]
+```
+```math
+\mathit{index}(1, [2, 3]) = [0, 1]
+```
+```math
+\mathit{index}(3, [2, 3]) = [1, 0]
+```
+```math
+\mathit{index}(5, [2, 3]) = [1, 2]
+```
