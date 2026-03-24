@@ -188,6 +188,9 @@ Tensor $C$ is the element-wise result of $A$ Added to $B$.
 The $\text{Add}$ operator has no attribute.
 
 ## Formal specification
+
+This formalization doesnt take into account the special values of the floating-point numbers and the rounding modes.
+
 [See Why3 specification](./formal/add.mlw).
 
 ## Numerical Accuracy

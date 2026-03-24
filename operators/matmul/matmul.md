@@ -366,6 +366,9 @@ Tensor $Y$ is the output tensor.
   - See constraint [<b><span style="font-family: 'Courier New', monospace">[C3]</span></b>](#C3Af) on tensor $A$ and see constraint [<b><span style="font-family: 'Courier New', monospace">[C3]</span></b>](#C3Bf) on tensor $B$.
 
 ## Formal specification
+
+This formalization doesnt take into account the special values of the floating-point numbers and the rounding modes.
+
 [See Why3 specification](./formal/matmul.mlw).
 
 ## Numerical Accuracy

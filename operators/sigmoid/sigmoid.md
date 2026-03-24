@@ -215,6 +215,8 @@ Sigmoid of tensor $X$.
 
 ## Formal specification
 
+This formalization doesnt take into account the special values of the floating-point numbers and the rounding modes.
+
 [See Why3 specification](./formal/sigmoid.mlw).
 
 ## Numeric accuracy

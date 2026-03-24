@@ -334,6 +334,9 @@ $Indices$ contains the indices of the input tensor $X$ from which the max values
 
 ## Formal specification
 
+
+This formalization doesnt take into account the $Indices$ output tensor.
+
 [See Why3 specification](./formal/maxpool.mlw).
 
 ## Numerical Accuracy
@@ -729,6 +732,8 @@ $Indices$ contains the indices of the input tensor $X$ from which the max values
 
 
 ## Formal specification
+
+This formalization doesnt take into account the $Indices$ output tensor and the special values of the floating-point numbers and the rounding modes.
 
 [See Why3 specification](./formal/maxpool.mlw).
 

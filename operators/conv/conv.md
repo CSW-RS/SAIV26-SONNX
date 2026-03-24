@@ -316,6 +316,8 @@ Where
 
 ## Formal specification
 
+This formalization doesnt take into account the bias addition.
+
 [See Why3 specification](./formal/conv.mlw).
 
 ## Numerical Accuracy
@@ -634,6 +636,8 @@ Where
     - Statement: see constraint [<b><span style="font-family: 'Courier New', monospace">[C2]</span></b>](#C2rattr1f) on attribute $\text{strides}$.
 
 ## Formal specification
+
+This formalization doesnt take into account the bias addition and the special values of the floating-point numbers and the rounding modes.
 
 [See Why3 specification](./formal/conv.mlw).
 
